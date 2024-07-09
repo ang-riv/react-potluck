@@ -36,13 +36,19 @@ function App() {
     console.log(individualGuestName);
     // guest list array
     console.log(guestsNamesList);
+    console.log(guestsNamesList.length);
 
-    // make a copy of that array then add the name to the array
-    const newArr = [individualGuestName, ...guestsNamesList];
+    // if the amount of people they are inputting into the array is less than the amount of people they said were going, then add them to the array
+    if (guestsNamesList.length < numOfGuests) {
+      // make a copy of that array then add the name to the array
+      const newArr = [individualGuestName, ...guestsNamesList];
 
-    // return? or set the new state to be this new array
-    setGuestsNamesList(newArr);
-
+      // return? or set the new state to be this new array
+      setGuestsNamesList(newArr);
+    } else if (guestsNamesList.length === numOfGuests) {
+      // if it is exactly that number then hide the button
+      console.log("Max limit");
+    }
     // reset input box for the next name
     //setIndividualGuestName("");
   }
