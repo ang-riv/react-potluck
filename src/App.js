@@ -10,21 +10,21 @@ function App() {
   // methods
   // allows the text input box to update with the user's input
   function updateName(e) {
-    // don't allow user to put in anything that isn't a number
     let userInput = e.target.value;
-
     setNumOfGuests(userInput);
   }
 
   function guestNum(e) {
     let guestNum = e.target.value;
-    console.log(guestNum);
+    setNumOfGuests(guestNum);
+    console.log(numOfGuests);
   }
 
   // take in the number of guests and create an array with that number
-  function handleSubmit(e) {
+  function handleClick(e) {
     e.preventDefault();
-    setGuestList(Array(numOfGuests).fill(null));
+    //setGuestList(Array(numOfGuests).fill(null));
+    console.log(numOfGuests);
   }
 
   // make function that generates the dropdown menu options with a loop
@@ -49,7 +49,11 @@ function App() {
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-        <input type="submit" value="Submit Guests"></input>
+        <input
+          type="submit"
+          value="Submit Guests"
+          onClick={handleClick}
+        ></input>
         {/* number of guests added to the array*/}
         {/*<h4>Attending: 0</h4>*/}
         {/*show what the array looks like*/}
