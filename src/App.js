@@ -26,7 +26,8 @@ function App() {
   }
 
   // just console logs for now
-  function handleSubmit(e) {
+  function handleClick(e) {
+    document.querySelector("#name").value = "";
     e.preventDefault();
     // number of guests
     console.log(numOfGuests + "testing!");
@@ -50,8 +51,6 @@ function App() {
       // maybe return?
       console.log("Max limit");
     }
-    // reset input box for the next name
-    setIndividualGuestName("");
   }
 
   // create a function that pushes names into an array of the guests names, make sure to keep going until they reached the number of guests they wanted
@@ -78,16 +77,11 @@ function App() {
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-        <button>Submit Guests</button>
+        <input type="button" value="Submit Guests"></input>
         <h4>Enter each name of your guests: </h4>
-        <input type="text" onChange={updateName}></input>
+        <input id="name" type="text" onChange={updateName}></input>
         <br />
-        <button> Submit Guest Name</button>
-        <input
-          type="submit"
-          value="Tester Input"
-          onSubmit={handleSubmit}
-        ></input>
+        <input type="button" value="Submit Name" onClick={handleClick}></input>
         {/* number of guests added to the array*/}
         <h4>Attending: {numOfGuests}</h4>
         <p>Guest Names: {guestsNamesList}</p>
