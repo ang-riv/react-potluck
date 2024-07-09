@@ -5,13 +5,29 @@ function App() {
   // number of guests that we will base our array on
   const [numOfGuests, setNumOfGuests] = useState();
   // initialize state to an empty array where we will put the guest names in the second UI, then once full, have a assign dishes btn
-  const [guestList, setGuestList] = useState([]);
+  const [guestList, setGuestList] = useState();
 
   // methods
   // allows the text input box to update with the user's input
   function updateName(e) {
-    setNumOfGuests(e.target.value);
+    // don't allow user to put in anything that isn't a number
+    let userInput = e.target.value;
+
+    setNumOfGuests(userInput);
   }
+
+  function guestNum(e) {
+    let guestNum = e.target.value;
+    console.log(guestNum);
+  }
+
+  // take in the number of guests and create an array with that number
+  function handleSubmit(e) {
+    e.preventDefault();
+    setGuestList(Array(numOfGuests).fill(null));
+  }
+
+  // make function that generates the dropdown menu options with a loop
 
   return (
     <div className="App">
@@ -22,15 +38,21 @@ function App() {
       </h2>
       <h3>How many people are you inviting?</h3>
       <form>
-        <input
-          type="text"
-          placeholder="Add number of guest's here..."
-          value={numOfGuests}
-          onChange={updateName}
-        ></input>
-        <input type="submit" value="Add Guest"></input>
+        {/* dropdown menu*/}
+        {/* tester */}
+        <input type="text" onChange={updateName}></input>
+        <select onChange={guestNum}>
+          <option value="">Select number:</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <input type="submit" value="Submit Guests"></input>
         {/* number of guests added to the array*/}
         {/*<h4>Attending: 0</h4>*/}
+        {/*show what the array looks like*/}
       </form>
     </div>
   );
