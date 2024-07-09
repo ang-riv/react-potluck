@@ -2,8 +2,16 @@ import "./App.css";
 import React from "react";
 import { useState } from "react";
 function App() {
-  // initialize state to an empty array where we will put the guest names
+  // number of guests that we will base our array on
+  const [numOfGuests, setNumOfGuests] = useState();
+  // initialize state to an empty array where we will put the guest names in the second UI, then once full, have a assign dishes btn
   const [guestList, setGuestList] = useState([]);
+
+  // methods
+  // allows the text input box to update with the user's input
+  function updateName(e) {
+    setNumOfGuests(e.target.value);
+  }
 
   return (
     <div className="App">
@@ -17,8 +25,8 @@ function App() {
         <input
           type="text"
           placeholder="Add number of guest's here..."
-          value=""
-          onChange=""
+          value={numOfGuests}
+          onChange={updateName}
         ></input>
         <input type="submit" value="Add Guest"></input>
         {/* number of guests added to the array*/}
