@@ -2,31 +2,53 @@ import "./App.css";
 import React from "react";
 import { useState } from "react";
 function App() {
-  // number of guests that we will base our array on
+  // number of guests
   const [numOfGuests, setNumOfGuests] = useState();
-  // initialize state to an empty array where we will put the guest names in the second UI, then once full, have a assign dishes btn
-  const [guestList, setGuestList] = useState();
 
-  // methods
+  // initialize state to an empty array where we will put the guest names in the second UI, then once full, have a assign dishes btn
+  const [guestList, setGuestList] = useState([]);
+  const [individualGuestName, setIndividualGuestName] = useState("");
+  // this array will hold all of the names of the guests!
+  const [guestsNamesList, setGuestsNamesList] = useState([]);
+
+  // *** methods
   // allows the text input box to update with the user's input
   function updateName(e) {
     let userInput = e.target.value;
-    setNumOfGuests(userInput);
+    setIndividualGuestName(userInput);
+    e.preventDefault();
   }
 
+  // take in the number of guests and create an array with that number!
   function guestNum(e) {
-    let guestNum = e.target.value;
-    setNumOfGuests(guestNum);
-    console.log(numOfGuests);
+    setNumOfGuests(Number(e.target.value));
+    setGuestList(Array(Number(e.target.value)).fill(null));
   }
 
-  // take in the number of guests and create an array with that number
+  // just console logs for now
   function handleClick(e) {
     e.preventDefault();
-    //setGuestList(Array(numOfGuests).fill(null));
-    console.log(numOfGuests);
+    // number of guests
+    console.log(numOfGuests + "testing!");
+    // other filled with null array
+    //console.log(guestList);
+    // show the array
+    console.log(individualGuestName);
+    // guest list array
+    console.log(guestsNamesList);
+
+    // make a copy of that array then add the name to the array
+    const newArr = [individualGuestName, ...guestsNamesList];
+
+    // return? or set the new state to be this new array
+    setGuestsNamesList(newArr);
+
+    // reset input box for the next name
+    //setIndividualGuestName("");
   }
 
+  // create a function that pushes names into an array of the guests names, make sure to keep going until they reached the number of guests they wanted
+  // show Guest List full! when they do, and another button that says assign dishes
   // make function that generates the dropdown menu options with a loop
 
   return (
@@ -34,13 +56,13 @@ function App() {
       <h1>Potluck Guest List</h1>
       <h2>
         Having a potluck but guests don't know what to bring? <br />
-        With this generator, guests will be assigned a random dish to bring!
+        Assign them a random dish to bring!
       </h2>
       <h3>How many people are you inviting?</h3>
       <form>
         {/* dropdown menu*/}
-        {/* tester */}
-        <input type="text" onChange={updateName}></input>
+        {/* try to add in a conditional so that while show is true, show these elements. When the button is pressed then hide these elements and put in a thumbs up in it's place*/}
+        <h4 style={{ display: "none" }}>👍</h4>
         <select onChange={guestNum}>
           <option value="">Select number:</option>
           <option value="1">1</option>
@@ -49,13 +71,14 @@ function App() {
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-        <input
-          type="submit"
-          value="Submit Guests"
-          onClick={handleClick}
-        ></input>
+        <button>Submit Guests</button>
+        <h4>Enter each name of your guests: </h4>
+        <input type="text" onChange={updateName}></input>
+        <br />
+        <button onClick={handleClick}> Submit Guest Name</button>
         {/* number of guests added to the array*/}
-        {/*<h4>Attending: 0</h4>*/}
+        <h4>Attending: {numOfGuests}</h4>
+        <p>Guest Names: {guestsNamesList}</p>
         {/*show what the array looks like*/}
       </form>
     </div>
