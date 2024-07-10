@@ -67,7 +67,9 @@ function App() {
       console.log("Max limit");
       // replace with useRef
       const guestBtn = document.querySelector("#guest");
+      const guestInput = document.querySelector("#name");
       guestBtn.classList.add("hide");
+      guestInput.classList.add("hide");
     }
   }
 
@@ -78,6 +80,10 @@ function App() {
     const randomRecipe = recipes[randomIndex].trim();
 
     // pick random guest
+    const randomNameIndex = Math.floor(Math.random() * guestList);
+    const randomName = recipes[randomNameIndex].trim();
+
+    // sort algorithm? prevent duplicates? new array with an object of the name and the recipe?
   }
 
   return (
