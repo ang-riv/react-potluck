@@ -29,7 +29,6 @@ function App() {
   // take in the number of guests and create an array with that number!
   function guestNum(e) {
     setNumOfGuests(Number(e.target.value));
-    setGuestList(Array(Number(e.target.value)).fill(null));
   }
 
   // just console logs for now
@@ -43,8 +42,8 @@ function App() {
     // show the array
     console.log(individualGuestName);
     // guest list array
-    console.log(guestsNamesList);
-    console.log(guestsNamesList.length);
+    console.log(guestList);
+    console.log(guestList.length);
 
     // if the amount of people they are inputting into the array is less than the amount of people they said were going, then add them to the array
     if (guestsNamesList.length < numOfGuests) {
@@ -59,12 +58,12 @@ function App() {
         console.log("Not letters");
       } else {
         // make a copy of that array then add the name to the array
-        const newArr = [individualGuestName, ...guestsNamesList];
+        const newArr = [individualGuestName, ...guestList];
 
         // return? or set the new state to be this new array
-        setGuestsNamesList(newArr);
+        setGuestList(newArr);
       }
-    } else if (guestsNamesList.length === numOfGuests) {
+    } else if (guestList.length === numOfGuests) {
       // if it is exactly that number then hide the button
       // maybe return?
       console.log("Max limit");
@@ -103,7 +102,7 @@ function App() {
         <input type="button" value="Submit Name" onClick={handleClick}></input>
         {/* number of guests added to the array*/}
         <h4>Attending: {numOfGuests}</h4>
-        <p>Guest Names: {guestsNamesList}</p>
+        <p>Guest Names: {guestList}</p>
         {/*show what the array looks like*/}
       </form>
     </div>
