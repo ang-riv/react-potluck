@@ -11,7 +11,7 @@ function App() {
   // this array will hold all of the names of the guests!
   const [guestsNamesList, setGuestsNamesList] = useState([]);
   // foods that will eventually be replaced with an API
-  const [foods, setFoods] = useState([
+  const [recipes, setRecipes] = useState([
     "Pinwheels",
     "Mashed Potatoes",
     "Sliders",
@@ -32,9 +32,8 @@ function App() {
   }
 
   // just console logs for now
-  function handleClick(e) {
+  function handleClick() {
     document.querySelector("#name").value = "";
-    e.preventDefault();
     // number of guests
     console.log(numOfGuests + "testing!");
     // other filled with null array
@@ -46,11 +45,10 @@ function App() {
     console.log(guestList.length);
 
     // if the amount of people they are inputting into the array is less than the amount of people they said were going, then add them to the array
-    if (guestsNamesList.length < numOfGuests) {
+    if (guestList.length < numOfGuests) {
       // make sure that what is added to the array is a name/ letters only
       const lettersOnly = /^[a-zA-Z]*$/.test(individualGuestName);
 
-      // try substring of
       if (individualGuestName === "") {
         console.log("Empty name");
       } else if (!lettersOnly) {
@@ -65,14 +63,22 @@ function App() {
       }
     } else if (guestList.length === numOfGuests) {
       // if it is exactly that number then hide the button
-      // maybe return?
+      // change later
       console.log("Max limit");
+      // replace with useRef
+      const guestBtn = document.querySelector("#guest");
+      guestBtn.classList.add("hide");
     }
   }
 
-  // create a function that pushes names into an array of the guests names, make sure to keep going until they reached the number of guests they wanted
-  // show Guest List full! when they do, and another button that says assign dishes
-  // make function that generates the dropdown menu options with a loop
+  // assigns dishes to the guests randomly
+  function handleDishes() {
+    // pick a random food
+    const randomIndex = Math.floor(Math.random() * recipes);
+    const randomRecipe = recipes[randomIndex].trim();
+
+    // pick random guest
+  }
 
   return (
     <div className="App">
@@ -99,11 +105,20 @@ function App() {
         <h4>Enter each name of your guests: </h4>
         <input id="name" type="text" onChange={updateName}></input>
         <br />
-        <input type="button" value="Submit Name" onClick={handleClick}></input>
+        <input
+          id="guest"
+          type="button"
+          value="Submit Name"
+          onClick={handleClick}
+        ></input>
         {/* number of guests added to the array*/}
         <h4>Attending: {numOfGuests}</h4>
         <p>Guest Names: {guestList}</p>
-        {/*show what the array looks like*/}
+        <input
+          type="button"
+          value="Assign Dishes"
+          onClick={handleDishes}
+        ></input>
       </form>
     </div>
   );
