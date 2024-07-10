@@ -10,8 +10,15 @@ function App() {
   const [individualGuestName, setIndividualGuestName] = useState("");
   // this array will hold all of the names of the guests!
   const [guestsNamesList, setGuestsNamesList] = useState([]);
-
+  // foods that will eventually be replaced with an API
+  const [foods, setFoods] = useState([
+    "Pinwheels",
+    "Mashed Potatoes",
+    "Sliders",
+    "Pasta Salad",
+  ]);
   // *** methods
+
   // allows the text input box to update with the user's input
   function updateName(e) {
     let userInput = e.target.value;
@@ -41,11 +48,22 @@ function App() {
 
     // if the amount of people they are inputting into the array is less than the amount of people they said were going, then add them to the array
     if (guestsNamesList.length < numOfGuests) {
-      // make a copy of that array then add the name to the array
-      const newArr = [individualGuestName, ...guestsNamesList];
+      // make sure that what is added to the array is a name/ letters only
+      const lettersOnly = /^[a-zA-Z]*$/.test(individualGuestName);
 
-      // return? or set the new state to be this new array
-      setGuestsNamesList(newArr);
+      // try substring of
+      if (individualGuestName === "") {
+        console.log("Empty name");
+      } else if (!lettersOnly) {
+        // if the name in
+        console.log("Not letters");
+      } else {
+        // make a copy of that array then add the name to the array
+        const newArr = [individualGuestName, ...guestsNamesList];
+
+        // return? or set the new state to be this new array
+        setGuestsNamesList(newArr);
+      }
     } else if (guestsNamesList.length === numOfGuests) {
       // if it is exactly that number then hide the button
       // maybe return?
@@ -70,6 +88,7 @@ function App() {
         {/* try to add in a conditional so that while show is true, show these elements. When the button is pressed then hide these elements and put in a thumbs up in it's place*/}
         <h4 style={{ display: "none" }}>👍</h4>
         <select onChange={guestNum}>
+          {/* use loop to make an option*/}
           <option value="">Select number:</option>
           <option value="1">1</option>
           <option value="2">2</option>
