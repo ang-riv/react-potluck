@@ -18,8 +18,10 @@ function App() {
     "Pasta Salad",
   ]);
 
-  // using refs to hide the whole div
+  // using refs to hide the whole divs/sections
   const guestNameInputRef = useRef(null);
+  // unordered list that will hold guest names and the dishes that they have been assigned
+  const listRef = useRef(null);
 
   // *** methods
   // allows the text input box to update with the user's input
@@ -77,15 +79,18 @@ function App() {
 
   // assigns dishes to the guests randomly
   function handleDishes() {
-    // pick a random food
-    const randomIndex = Math.floor(Math.random() * recipes);
-    const randomRecipe = recipes[randomIndex].trim();
+    for (const guest of guestList) {
+      // pick a random food from the recipe array
+      const randomIndex = Math.floor(Math.random() * recipes.length);
+      const randomRecipe = recipes[randomIndex].trim();
 
-    // pick random guest
-    const randomNameIndex = Math.floor(Math.random() * guestList);
-    const randomName = recipes[randomNameIndex].trim();
-
-    // sort algorithm? prevent duplicates? new array with an object of the name and the recipe?
+      // create a list item for each guest and what they'll bring
+      // TODO replace with a component later
+      let listItem = document.createElement("li");
+      listItem.innerText = `${guest} is bringing ${randomRecipe}.`;
+      listRef.current.append(listItem);
+      recipes.splice(randomIndex, 1);
+    }
   }
 
   return (
@@ -124,6 +129,8 @@ function App() {
         {/* number of guests added to the array*/}
         <h4>Attending: {numOfGuests}</h4>
         <p>Guest Names: {guestList}</p>
+        <h4>Everyone is bringing...</h4>
+        <ul ref={listRef}></ul>
         <input
           type="button"
           value="Assign Dishes"
