@@ -58,11 +58,14 @@ function App() {
     }
   }
 
-  // just console logs for now
+  // adds names to the guestList array
   function handleClick() {
+    // empty the input box after each name is entered
     if (inputRef.current) {
       inputRef.current.value = "";
     }
+
+    /* test console.logs
     // number of guests
     console.log(numOfGuests + "testing!");
     // other filled with null array
@@ -72,11 +75,12 @@ function App() {
     // guest list array
     console.log(guestList);
     console.log(guestList.length);
+    */
 
     // if the amount of people they are inputting into the array is less than the amount of people they said were going, then add them to the array
     if (guestList.length < numOfGuests) {
       // make sure that what is added to the array is a name/ letters only
-      const lettersOnly = /^[a-zA-Z]*$/.test(individualGuestName);
+      const lettersOnly = /^[a-zA-Z\s-]*$/.test(individualGuestName);
 
       if (individualGuestName === "") {
         console.log("Empty name");
