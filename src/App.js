@@ -25,6 +25,7 @@ function App() {
   // using refs to hide whole divs/sections
   const guestNameInputRef = useRef(null);
   const invitedRef = useRef(null);
+  const assignedDishesRef = useRef(null);
   // unordered list that will hold guest names and the dishes that they have been assigned, will be changed later maybe
   const listRef = useRef(null);
   const numError = useRef(null);
@@ -159,16 +160,18 @@ function App() {
             value="Submit Name"
             onClick={handleClick}
           ></input>
+          <h4>Sending invites to:</h4>
+          <h5>{namesList}</h5>
         </div>
-        {/* number of guests added to the array*/}
-        <p>Guest Names: {namesList}</p>
-        <h4>Everyone is bringing...</h4>
-        <ul ref={listRef}></ul>
-        <input
-          type="button"
-          value="Assign Dishes"
-          onClick={handleDishes}
-        ></input>
+        <div ref={assignedDishesRef}>
+          <h4>Everyone is bringing...</h4>
+          <ul ref={listRef}></ul>
+          <input
+            type="button"
+            value="Assign Dishes"
+            onClick={handleDishes}
+          ></input>
+        </div>
       </form>
     </div>
   );
