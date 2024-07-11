@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useRef } from "react";
 
 function App() {
+  //** states
   // number of guests
-  const [numOfGuests, setNumOfGuests] = useState();
+  const [numOfGuests, setNumOfGuests] = useState(0);
   // array of guest's names
   const [guestList, setGuestList] = useState([]);
   // single guest's name
@@ -18,12 +19,15 @@ function App() {
     "Pasta Salad",
   ]);
 
-  // using refs to hide the whole divs/sections
+  //** refs
+  // using refs to hide whole divs/sections
   const guestNameInputRef = useRef(null);
-  // unordered list that will hold guest names and the dishes that they have been assigned
+  const invitedRef = useRef(null);
+  // unordered list that will hold guest names and the dishes that they have been assigned, will be changed later maybe
   const listRef = useRef(null);
+  const numError = useRef(null);
 
-  // *** methods
+  //** methods
   // allows the text input box to update with the user's input
   function updateName(e) {
     let userInput = e.target.value;
@@ -31,9 +35,23 @@ function App() {
     e.preventDefault();
   }
 
-  // take in the number of guests and create an array with that number!
+  // take in the number of guests and create an array with that number
   function guestNum(e) {
     setNumOfGuests(Number(e.target.value));
+  }
+
+  function handleHideBtn() {
+    // make sure user made a selection
+    // TODO: change to toast?
+    if (numOfGuests === 0) {
+      if (numError.current) {
+        numError.current.style.display = "block";
+      }
+    } else {
+      if (invitedRef.current) {
+        invitedRef.current.style.display = "none";
+      }
+    }
   }
 
   // just console logs for now
@@ -100,21 +118,30 @@ function App() {
         Having a potluck but guests don't know what to bring? <br />
         Assign them a random dish to bring!
       </h2>
-      <h3>How many people are you inviting?</h3>
       <form>
-        {/* dropdown menu*/}
-        {/* try to add in a conditional so that while show is true, show these elements. When the button is pressed then hide these elements and put in a thumbs up in it's place*/}
-        <h4 style={{ display: "none" }}>👍</h4>
-        <select onChange={guestNum}>
-          {/* use loop to make an option*/}
-          <option value="">Select number:</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <input type="button" value="Submit Guests"></input>
+        <div ref={invitedRef}>
+          <h3>How many people are you inviting?</h3>
+          {/* dropdown menu*/}
+          {/* try to add in a conditional so that while show is true, show these elements. When the button is pressed then hide these elements and put in a thumbs up in it's place*/}
+          <h4 style={{ display: "none" }}>👍</h4>
+          <p ref={numError} style={{ display: "none", color: "red" }}>
+            Please select a number
+          </p>
+          <select onChange={guestNum}>
+            {/* use loop to make an option*/}
+            <option value="0">Select number:</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <input
+            onClick={handleHideBtn}
+            type="button"
+            value="Submit Guests"
+          ></input>
+        </div>
         <h4>Enter each name of your guests: </h4>
         <div ref={guestNameInputRef}>
           <input id="name" type="text" onChange={updateName}></input>
