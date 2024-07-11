@@ -18,10 +18,8 @@ function App() {
     "Pasta Salad",
   ]);
 
-  // using refs to hide btns and inputs
-  const dropDownRef = useRef(null);
-  const inputRef = useRef(null);
-  const submitNameRef = useRef(null);
+  // using refs to hide the whole div
+  const guestNameInputRef = useRef(null);
 
   // *** methods
   // allows the text input box to update with the user's input
@@ -67,14 +65,13 @@ function App() {
         setGuestList(newArr);
       }
     } else if (guestList.length === numOfGuests) {
-      // if it is exactly that number then hide the button
+      // if it is exactly that number then hide the elements
       // change later
       console.log("Max limit");
-      // replace with useRef
-      const guestsDiv = document.querySelector("#guests");
-      //const guestInput = document.querySelector("#name");
-      guestsDiv.classList.add("hide");
-      //guestInput.classList.add("hide");
+
+      if (guestNameInputRef.current) {
+        guestNameInputRef.current.style.display = "none";
+      }
     }
   }
 
@@ -114,7 +111,7 @@ function App() {
         </select>
         <input type="button" value="Submit Guests"></input>
         <h4>Enter each name of your guests: </h4>
-        <div id="guests">
+        <div ref={guestNameInputRef}>
           <input id="name" type="text" onChange={updateName}></input>
           <br />
           <input
