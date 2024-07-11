@@ -1,15 +1,15 @@
 import "./App.css";
 import React from "react";
 import { useState } from "react";
+import { useRef } from "react";
+
 function App() {
   // number of guests
   const [numOfGuests, setNumOfGuests] = useState();
-
-  // initialize state to an empty array where we will put the guest names in the second UI, then once full, have a assign dishes btn
+  // array of guest's names
   const [guestList, setGuestList] = useState([]);
+  // single guest's name
   const [individualGuestName, setIndividualGuestName] = useState("");
-  // this array will hold all of the names of the guests!
-  const [guestsNamesList, setGuestsNamesList] = useState([]);
   // foods that will eventually be replaced with an API
   const [recipes, setRecipes] = useState([
     "Pinwheels",
@@ -17,8 +17,13 @@ function App() {
     "Sliders",
     "Pasta Salad",
   ]);
-  // *** methods
 
+  // using refs to hide btns and inputs
+  const dropDownRef = useRef(null);
+  const inputRef = useRef(null);
+  const submitNameRef = useRef(null);
+
+  // *** methods
   // allows the text input box to update with the user's input
   function updateName(e) {
     let userInput = e.target.value;
@@ -66,10 +71,10 @@ function App() {
       // change later
       console.log("Max limit");
       // replace with useRef
-      const guestBtn = document.querySelector("#guest");
-      const guestInput = document.querySelector("#name");
-      guestBtn.classList.add("hide");
-      guestInput.classList.add("hide");
+      const guestsDiv = document.querySelector("#guests");
+      //const guestInput = document.querySelector("#name");
+      guestsDiv.classList.add("hide");
+      //guestInput.classList.add("hide");
     }
   }
 
@@ -109,14 +114,16 @@ function App() {
         </select>
         <input type="button" value="Submit Guests"></input>
         <h4>Enter each name of your guests: </h4>
-        <input id="name" type="text" onChange={updateName}></input>
-        <br />
-        <input
-          id="guest"
-          type="button"
-          value="Submit Name"
-          onClick={handleClick}
-        ></input>
+        <div id="guests">
+          <input id="name" type="text" onChange={updateName}></input>
+          <br />
+          <input
+            id="guest"
+            type="button"
+            value="Submit Name"
+            onClick={handleClick}
+          ></input>
+        </div>
         {/* number of guests added to the array*/}
         <h4>Attending: {numOfGuests}</h4>
         <p>Guest Names: {guestList}</p>
