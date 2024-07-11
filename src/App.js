@@ -9,6 +9,8 @@ function App() {
   const [numOfGuests, setNumOfGuests] = useState(0);
   // array of guest's names
   const [guestList, setGuestList] = useState([]);
+  // display the names nicer
+  const namesList = guestList.join(", ");
   // single guest's name
   const [individualGuestName, setIndividualGuestName] = useState("");
   // foods that will eventually be replaced with an API
@@ -78,8 +80,8 @@ function App() {
         // if the name in
         console.log("Not letters");
       } else {
-        // make a copy of that array then add the name to the array
-        const newArr = [individualGuestName, ...guestList];
+        // make a copy of that array then add the name to the end
+        const newArr = [...guestList, individualGuestName];
 
         // return? or set the new state to be this new array
         setGuestList(newArr);
@@ -111,6 +113,10 @@ function App() {
     }
   }
 
+  // displays all of the user inputted guest names so they can see who they've added
+  function displayGuests() {
+    const namesList = guestList.join(", ");
+  }
   return (
     <div className="App">
       <h1>Potluck Guest List</h1>
@@ -142,7 +148,8 @@ function App() {
             value="Submit Guests"
           ></input>
         </div>
-        <h4>Enter each name of your guests: </h4>
+        <h3>Attending: {numOfGuests}</h3>
+        <h3>Enter each name of your guests: </h3>
         <div ref={guestNameInputRef}>
           <input id="name" type="text" onChange={updateName}></input>
           <br />
@@ -154,8 +161,7 @@ function App() {
           ></input>
         </div>
         {/* number of guests added to the array*/}
-        <h4>Attending: {numOfGuests}</h4>
-        <p>Guest Names: {guestList}</p>
+        <p>Guest Names: {namesList}</p>
         <h4>Everyone is bringing...</h4>
         <ul ref={listRef}></ul>
         <input
