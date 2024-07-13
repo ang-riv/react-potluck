@@ -65,9 +65,10 @@ function App() {
       inputRef.current.value = "";
     }
 
-    /* test console.logs
+    // test console.logs
     // number of guests
-    console.log(numOfGuests + "testing!");
+    console.log(guestList.length + "testing!");
+    /*
     // other filled with null array
     //console.log(guestList);
     // show the array
@@ -77,33 +78,34 @@ function App() {
     console.log(guestList.length);
     */
 
+    const hideBtn = numOfGuests - 1;
+
     // if the amount of people they are inputting into the array is less than the amount of people they said were going, then add them to the array
     if (guestList.length < numOfGuests) {
       // make sure that what is added to the array is a name/ letters only
       const lettersOnly = /^[a-zA-Z\s-]*$/.test(individualGuestName);
 
+      // TODO: error message for if the input is empty or if they input a number of letters
       if (individualGuestName === "") {
         console.log("Empty name");
       } else if (!lettersOnly) {
-        // if the name in
+        // if anything other than letters are inputted
         console.log("Not letters");
       } else {
-        // make a copy of that array then add the name to the end
+        // make a copy of that array then add the name to the beginning
         const newArr = [...guestList, individualGuestName];
 
-        // return? or set the new state to be this new array
         setGuestList(newArr);
       }
-    } else if (guestList.length === numOfGuests) {
-      // if it is exactly that number then hide the elements
-      // change later
-      console.log("Max limit");
 
-      if (guestNameInputRef.current) {
-        guestNameInputRef.current.style.display = "none";
+      // hide the button after the last person is added to the array
+      if (guestList.length === hideBtn) {
+        if (guestNameInputRef.current) {
+          guestNameInputRef.current.style.display = "none";
+        }
       }
     }
-  }
+  } // end of handleClick
 
   // assigns dishes to the guests randomly
   function handleDishes() {
@@ -169,10 +171,12 @@ function App() {
             value="Submit Name"
             onClick={handleClick}
           ></input>
+          {/* move these as they will disappear after the last name is written. Maybe use a confirmation? or like an edit thing eventually?*/}
           <h4>Sending invites to:</h4>
           <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
         </div>
         <div ref={assignedDishesRef}>
+          <h4>GuestList Array's Length: {guestList.length}</h4>
           <h4>Everyone is bringing...</h4>
           <ul ref={listRef}></ul>
           <input
