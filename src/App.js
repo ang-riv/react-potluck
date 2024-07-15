@@ -123,10 +123,6 @@ function App() {
     }
   }
 
-  // displays all of the user inputted guest names so they can see who they've added
-  function displayGuests() {
-    const namesList = guestList.join(", ");
-  }
   return (
     <div className="App">
       <header>
@@ -146,7 +142,7 @@ function App() {
             Please select a number
           </p>
           <select onChange={guestNum}>
-            {/* use loop to make</header> an option*/}
+            {/* use loop to make an option in components*/}
             <option value="0">Select number:</option>
             <option value="1">1</option>
             <option value="2">2</option>
