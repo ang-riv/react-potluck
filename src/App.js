@@ -2,6 +2,10 @@ import "./App.css";
 import React from "react";
 import { useState } from "react";
 import { useRef } from "react";
+import Header from "./Header.js";
+import GuestNumber from "./GuestNumber.js";
+import GuestNames from "./GuestNames.js";
+import AssignDishes from "./AssignDishes.js";
 
 function App() {
   //** states
@@ -112,7 +116,7 @@ function App() {
     for (const guest of guestList) {
       // pick a random food from the recipe array
       const randomIndex = Math.floor(Math.random() * recipes.length);
-      const randomRecipe = recipes[randomIndex].trim();
+      const randomRecipe = recipes[randomIndex];
 
       // create a list item for each guest and what they'll bring
       // TODO replace with a component later
@@ -125,62 +129,29 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <h1>Potluck Guest List</h1>
-        <h2>
-          Having a potluck but guests don't know what to bring? <br />
-          Assign them a random dish to bring!
-        </h2>
-      </header>
+      <Header />
       <form>
-        <div ref={invitedRef}>
-          <h3>How many people are you inviting?</h3>
-          {/* dropdown menu*/}
-          {/* try to add in a conditional so that while show is true, show these elements. When the button is pressed then hide these elements and put in a thumbs up in it's place*/}
-          <h4 style={{ display: "none" }}>👍</h4>
-          <p ref={numErrorRef} style={{ display: "none", color: "red" }}>
-            Please select a number
-          </p>
-          <select onChange={guestNum}>
-            {/* use loop to make an option in components*/}
-            <option value="0">Select number:</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-          <input
-            onClick={handleHideBtn}
-            type="button"
-            value="Submit Guests"
-          ></input>
-        </div>
+        <GuestNumber
+          div={invitedRef}
+          errorMessage={numErrorRef}
+          onChange={guestNum}
+          onClick={handleHideBtn}
+        />
         <h3>Attending: {numOfGuests}</h3>
-        <h3>Enter each name of your guests: </h3>
-        <div ref={guestNameInputRef}>
-          <input ref={inputRef} type="text" onChange={updateName}></input>
-          <br />
-          <input
-            id="guest"
-            type="button"
-            value="Submit Name"
-            onClick={handleClick}
-          ></input>
-          {/* move these as they will disappear after the last name is written. Maybe use a confirmation? or like an edit thing eventually?*/}
-          <h4>Sending invites to:</h4>
-          <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
-        </div>
-        <div ref={assignedDishesRef}>
-          <h4>GuestList Array's Length: {guestList.length}</h4>
-          <h4>Everyone is bringing...</h4>
-          <ul ref={listRef}></ul>
-          <input
-            type="button"
-            value="Assign Dishes"
-            onClick={handleDishes}
-          ></input>
-        </div>
+        <GuestNames
+          div={guestNameInputRef}
+          inputRef={inputRef}
+          onChange={updateName}
+          onClick={handleClick}
+          namesList={namesList}
+        />
+        <h3>Sending invites to:</h3>
+        <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
+        <AssignDishes
+          div={assignedDishesRef}
+          ul={listRef}
+          onClick={handleDishes}
+        />
       </form>
     </div>
   );
