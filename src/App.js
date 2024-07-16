@@ -33,7 +33,7 @@ function App() {
   const guestNameInputRef = useRef(null);
   const invitedRef = useRef(null);
   const assignedDishesRef = useRef(null);
-  // unordered list that will hold guest names and the dishes that they have been assigned, will be changed later maybe
+  // individual elements
   const listRef = useRef(null);
   const numErrorRef = useRef(null);
   const inputRef = useRef(null);
@@ -61,15 +61,18 @@ function App() {
     } else {
       if (invitedRef.current) {
         invitedRef.current.style.display = "none";
+        // focus on the input box after btn is clicked
+        inputRef.current.focus();
       }
     }
   }
 
   // adds names to the guestList array
   function handleClick() {
-    // empty the input box after each name is entered
+    // empty the input box after each name is entered + focus input box
     if (inputRef.current) {
       inputRef.current.value = "";
+      inputRef.current.focus();
     }
 
     // test console.logs
@@ -112,7 +115,7 @@ function App() {
         }
       }
     }
-  } // end of handleClick
+  }
 
   // assigns dishes to the guests randomly
   function handleDishes() {
