@@ -53,18 +53,9 @@ function App() {
 
   function handleHideBtn() {
     // make sure user made a selection
-    // TODO: change to modal
-    if (numOfGuests === 0) {
-      if (numErrorRef.current) {
-        numErrorRef.current.style.display = "block";
-      }
-    } else {
-      if (invitedRef.current) {
-        invitedRef.current.style.display = "none";
-        // focus on the input box after btn is clicked
-        inputRef.current.focus();
-      }
-    }
+    invitedRef.current.style.display = "none";
+    // focus on the input box after btn is clicked
+    inputRef.current.focus();
   }
 
   // adds names to the guestList array
@@ -143,6 +134,7 @@ function App() {
           onChange={guestNum}
           onClick={handleHideBtn}
           num={numOfGuests}
+          handleHide={handleHideBtn}
         />
         <h3>Attending: {numOfGuests}</h3>
         <GuestNames

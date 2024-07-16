@@ -16,7 +16,7 @@ function GuestNumber(props) {
         {options}
       </select>
       {/* new button component here */}
-      <MyButton num={props.num} />
+      <MyButton num={props.num} handleHide={props.handleHide} />
       <input
         onClick={props.onClick}
         type="button"

@@ -12,8 +12,6 @@ function MyButton(props) {
   const input = props.inputRef;
   //const test = console.log("At zero!");
 
-  // event handler for when the button is pressed and guestNum is not empty
-  function handleClick() {}
   // if the number of guests is zero
   if (props.num === 0) {
     return (
@@ -36,7 +34,7 @@ function MyButton(props) {
     );
   } else {
     return (
-      <Button variant="warning" onClick={handleClick}>
+      <Button variant="warning" onClick={props.handleHide}>
         Submit Guests
       </Button>
     );
