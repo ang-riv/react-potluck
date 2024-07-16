@@ -1,23 +1,19 @@
 import React from "react";
 
 function GuestNumber(props) {
+  // use an array with map to generate the number options
+  const nums = [...Array(20)].map((_, i) => i + 1);
+  const options = nums.map((i) => <option value={i}>{i}</option>);
   return (
     <div ref={props.div}>
       <h3>How many people are you inviting?</h3>
-      {/* dropdown menu*/}
-      {/* try to add in a conditional so that while show is true, show these elements. When the button is pressed then hide these elements and put in a thumbs up in it's place*/}
-      <h4 style={{ display: "none" }}>👍</h4>
       <p ref={props.errorMessage} style={{ display: "none", color: "red" }}>
         Please select a number
       </p>
       <select onChange={props.onChange}>
         {/* use loop to make an option in components*/}
         <option value="0">Select number:</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
+        {options}
       </select>
       <input
         onClick={props.onClick}
