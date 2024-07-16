@@ -1,5 +1,5 @@
 import React from "react";
-
+import MyButton from "./Button.js";
 function GuestNumber(props) {
   // use an array with map to generate the number options
   const nums = [...Array(20)].map((_, i) => i + 1);
@@ -15,6 +15,8 @@ function GuestNumber(props) {
         <option value="0">Select number:</option>
         {options}
       </select>
+      {/* new button component here */}
+      <MyButton num={props.num} />
       <input
         onClick={props.onClick}
         type="button"

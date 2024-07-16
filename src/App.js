@@ -20,7 +20,7 @@ function App() {
   const namesList = guestList.join(", ");
   // single guest's name
   const [individualGuestName, setIndividualGuestName] = useState("");
-  // foods that will eventually be replaced with an API
+  // foods that will eventually be replaced with an API (doesn't need to be a state)
   const [recipes, setRecipes] = useState([
     "Pinwheels",
     "Mashed Potatoes",
@@ -142,6 +142,7 @@ function App() {
           errorMessage={numErrorRef}
           onChange={guestNum}
           onClick={handleHideBtn}
+          num={numOfGuests}
         />
         <h3>Attending: {numOfGuests}</h3>
         <GuestNames
