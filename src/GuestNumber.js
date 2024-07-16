@@ -7,21 +7,13 @@ function GuestNumber(props) {
   return (
     <div ref={props.div}>
       <h3>How many people are you inviting?</h3>
-      <p ref={props.errorMessage} style={{ display: "none", color: "red" }}>
-        Please select a number
-      </p>
       <select onChange={props.onChange}>
         {/* use loop to make an option in components*/}
         <option value="0">Select number:</option>
         {options}
       </select>
       {/* new button component here */}
-      <MyButton num={props.num} handleHide={props.handleHide} />
-      <input
-        onClick={props.onClick}
-        type="button"
-        value="Submit Guests"
-      ></input>
+      <MyButton num={props.num} onClick={props.onClick} />
     </div>
   );
 }

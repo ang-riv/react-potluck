@@ -34,7 +34,7 @@ function MyButton(props) {
     );
   } else {
     return (
-      <Button variant="warning" onClick={props.handleHide}>
+      <Button variant="primary" onClick={props.onClick}>
         Submit Guests
       </Button>
     );

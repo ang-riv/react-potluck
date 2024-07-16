@@ -134,7 +134,6 @@ function App() {
           onChange={guestNum}
           onClick={handleHideBtn}
           num={numOfGuests}
-          handleHide={handleHideBtn}
         />
         <h3>Attending: {numOfGuests}</h3>
         <GuestNames
