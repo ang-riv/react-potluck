@@ -1,7 +1,10 @@
-import "./App.css";
 import React from "react";
 import { useState } from "react";
 import { useRef } from "react";
+// stylesheets
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.js";
+// components
 import Header from "./Header.js";
 import GuestNumber from "./GuestNumber.js";
 import GuestNames from "./GuestNames.js";
@@ -50,7 +53,7 @@ function App() {
 
   function handleHideBtn() {
     // make sure user made a selection
-    // TODO: change to toast?
+    // TODO: change to modal
     if (numOfGuests === 0) {
       if (numErrorRef.current) {
         numErrorRef.current.style.display = "block";
@@ -119,7 +122,7 @@ function App() {
       const randomRecipe = recipes[randomIndex];
 
       // create a list item for each guest and what they'll bring
-      // TODO replace with a component later
+      // TODO replace with a component(?) later
       let listItem = document.createElement("li");
       listItem.innerText = `${guest} is bringing ${randomRecipe}.`;
       listRef.current.append(listItem);
