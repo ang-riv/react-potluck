@@ -12,8 +12,13 @@ function GuestNumber(props) {
         <option value="0">Select number:</option>
         {options}
       </select>
-      {/* new button component here */}
-      <MyButton num={props.num} onClick={props.onClick} />
+      {/* section invited indicates where the button is being used */}
+      <MyButton
+        num={props.num}
+        onClick={props.onClick}
+        innerText="Submit Guests"
+        section="invited"
+      />
     </div>
   );
 }
