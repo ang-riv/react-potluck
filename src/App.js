@@ -100,33 +100,37 @@ function App() {
     }
   }
 
+  // spread attributes for props
+  const guestNumberProps = {
+    div: invitedRef,
+    errorMessage: numErrorRef,
+    onChange: guestNum,
+    onClick: handleHideBtn,
+    num: numOfGuests,
+  };
+  const guestNamesProps = {
+    div: guestNameInputRef,
+    inputRef: inputRef,
+    onChange: updateName,
+    onClick: handleClick,
+    namesList: namesList,
+    name: individualGuestName,
+  };
+  const assignedDishesProps = {
+    div: assignedDishesRef,
+    ul: listRef,
+    onClick: handleDishes,
+  };
   return (
     <div className="App">
       <Header />
       <form>
-        <GuestNumber
-          div={invitedRef}
-          errorMessage={numErrorRef}
-          onChange={guestNum}
-          onClick={handleHideBtn}
-          num={numOfGuests}
-        />
+        <GuestNumber {...guestNumberProps} />
         <h3>Attending: {numOfGuests}</h3>
-        <GuestNames
-          div={guestNameInputRef}
-          inputRef={inputRef}
-          onChange={updateName}
-          onClick={handleClick}
-          namesList={namesList}
-          name={individualGuestName}
-        />
+        <GuestNames {...guestNamesProps} />
         <h3>Sending invites to:</h3>
         <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
-        <AssignDishes
-          div={assignedDishesRef}
-          ul={listRef}
-          onClick={handleDishes}
-        />
+        <AssignDishes {...assignedDishesProps} />
       </form>
     </div>
   );

@@ -10,16 +10,10 @@ function GuestNames(props) {
       {/* figure out why it's not working, works with the other button*/}
       <MyButton
         section="names"
-        innerText="Submit Name!"
+        innerText="Submit Name"
         onClick={props.onClick}
         name={props.name}
       />
-      <input
-        id="guest"
-        type="button"
-        value="Submit Name"
-        onClick={props.onClick}
-      ></input>
     </div>
   );
 }
