@@ -66,38 +66,14 @@ function App() {
       inputRef.current.focus();
     }
 
-    // test console.logs
-    // number of guests
-    console.log(guestList.length + "testing!");
-    /*
-    // other filled with null array
-    //console.log(guestList);
-    // show the array
-    console.log(individualGuestName);
-    // guest list array
-    console.log(guestList);
-    console.log(guestList.length);
-    */
-
     const hideBtn = numOfGuests - 1;
 
     // if the amount of people they are inputting into the array is less than the amount of people they said were going, then add them to the array
     if (guestList.length < numOfGuests) {
-      // make sure that what is added to the array is a name/ letters only
-      const lettersOnly = /^[a-zA-Z\s-]*$/.test(individualGuestName);
+      // make a copy of that array then add the name to the beginning
+      const newArr = [...guestList, individualGuestName];
 
-      // TODO: error message for if the input is empty or if they input a number of letters
-      if (individualGuestName === "") {
-        console.log("Empty name");
-      } else if (!lettersOnly) {
-        // if anything other than letters are inputted
-        console.log("Not letters");
-      } else {
-        // make a copy of that array then add the name to the beginning
-        const newArr = [...guestList, individualGuestName];
-
-        setGuestList(newArr);
-      }
+      setGuestList(newArr);
 
       // hide the button after the last person is added to the array
       if (guestList.length === hideBtn) {
@@ -142,6 +118,7 @@ function App() {
           onChange={updateName}
           onClick={handleClick}
           namesList={namesList}
+          name={individualGuestName}
         />
         <h3>Sending invites to:</h3>
         <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>

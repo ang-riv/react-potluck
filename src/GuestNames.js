@@ -12,6 +12,7 @@ function GuestNames(props) {
         section="names"
         innerText="Submit Name!"
         onClick={props.onClick}
+        name={props.name}
       />
       <input
         id="guest"
