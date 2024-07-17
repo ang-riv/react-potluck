@@ -20,7 +20,7 @@ function MyButton(props) {
   // guest number  section
   if (props.section === "invited") {
     if (props.num === 0) {
-      return <ErrorModal innerText={innerText} />;
+      return <ErrorModal innerText={innerText} section={props.section} />;
     } else {
       return (
         <Button variant="primary" onClick={props.onClick}>
@@ -32,7 +32,7 @@ function MyButton(props) {
     // guest names sections
     // if individualguestname is nothing then do the modal again like above, then if not then do the regular onClick stuff
     if (props.name === "" || !lettersOnly) {
-      return <ErrorModal innerText={innerText} />;
+      return <ErrorModal innerText={innerText} section={props.names} />;
     } else {
       return (
         <>
