@@ -7,7 +7,13 @@ function AssignDishes(props) {
     <div ref={props.div}>
       {/*<h4>GuestList Array's Length: {props.guestList.length}</h4>*/}
       <h4>Everyone is bringing...</h4>
-      <ul ref={props.ul}></ul>
+      <ul ref={props.ul}>
+        {props.dishes.map((dish, index) => (
+          <li key={index}>
+            {dish.guest} is bringing {dish.recipe}.
+          </li>
+        ))}
+      </ul>
       <MyButton innerText="Assign Dishes" onClick={props.onClick} />
     </div>
   );

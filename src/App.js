@@ -20,6 +20,8 @@ function App() {
   const namesList = guestList.join(", ");
   // single guest's name
   const [individualGuestName, setIndividualGuestName] = useState("");
+  // for displaying the dishes in a list
+  const [dishes, setDishes] = useState([]);
   // foods that will eventually be replaced with an API (doesn't need to be a state)
   const [recipes, setRecipes] = useState([
     "Pinwheels",
@@ -49,6 +51,7 @@ function App() {
   // take in the number of guests and create an array with that number
   const guestNum = (e) => setNumOfGuests(Number(e.target.value));
 
+  // hide divs
   const handleHideBtn = () => {
     // make sure user made a selection
     invitedRef.current.style.display = "none";
@@ -84,19 +87,16 @@ function App() {
 
   // assigns dishes to the guests randomly
   const handleDishes = () => {
-    for (const guest of guestList) {
-      // pick a random food from the recipe array
-      const randomIndex = Math.floor(Math.random() * recipes.length);
-      const randomRecipe = recipes[randomIndex];
+    const updatedRecipes = [...recipes];
+    const newDishes = guestList.map((guest) => {
+      const randomIndex = Math.floor(Math.random() * updatedRecipes.length);
+      const randomRecipe = updatedRecipes[randomIndex];
 
-      // create a list item for each guest and what they'll bring
-      // find an alternative to this
-      let listItem = document.createElement("li");
-      listItem.innerText = `${guest} is bringing ${randomRecipe}.`;
-      listRef.current.append(listItem);
-      // remove the selected recipe from the array
-      recipes.splice(randomIndex, 1);
-    }
+      updatedRecipes.splice(randomIndex, 1);
+      return { guest, recipe: randomRecipe };
+    });
+
+    setDishes(newDishes);
   };
 
   // spread attributes for props
@@ -119,6 +119,7 @@ function App() {
     div: assignedDishesRef,
     ul: listRef,
     onClick: handleDishes,
+    dishes: dishes,
   };
   return (
     <div className="App">
