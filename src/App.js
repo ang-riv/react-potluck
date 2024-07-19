@@ -47,19 +47,17 @@ function App() {
   }
 
   // take in the number of guests and create an array with that number
-  function guestNum(e) {
-    setNumOfGuests(Number(e.target.value));
-  }
+  const guestNum = (e) => setNumOfGuests(Number(e.target.value));
 
-  function handleHideBtn() {
+  const handleHideBtn = () => {
     // make sure user made a selection
     invitedRef.current.style.display = "none";
     // focus on the input box after btn is clicked
     inputRef.current.focus();
-  }
+  };
 
   // adds names to the guestList array
-  function handleClick() {
+  const handleClick = () => {
     // empty the input box after each name is entered + focus input box
     if (inputRef.current) {
       inputRef.current.value = "";
@@ -82,23 +80,24 @@ function App() {
         }
       }
     }
-  }
+  };
 
   // assigns dishes to the guests randomly
-  function handleDishes() {
+  const handleDishes = () => {
     for (const guest of guestList) {
       // pick a random food from the recipe array
       const randomIndex = Math.floor(Math.random() * recipes.length);
       const randomRecipe = recipes[randomIndex];
 
       // create a list item for each guest and what they'll bring
-      // TODO replace with a component(?) later
+      // find an alternative to this
       let listItem = document.createElement("li");
       listItem.innerText = `${guest} is bringing ${randomRecipe}.`;
       listRef.current.append(listItem);
+      // remove the selected recipe from the array
       recipes.splice(randomIndex, 1);
     }
-  }
+  };
 
   // spread attributes for props
   const guestNumberProps = {
