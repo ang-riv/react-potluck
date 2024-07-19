@@ -87,15 +87,12 @@ function App() {
 
   // assigns dishes to the guests randomly
   const handleDishes = () => {
-    // make a copy of recipes
     const updatedRecipes = [...recipes];
-    // for every guest in the guest list, assign them a random recipe
     const newDishes = guestList.map((guest) => {
       const randomIndex = Math.floor(Math.random() * updatedRecipes.length);
       const randomRecipe = updatedRecipes[randomIndex];
-      // remove the used recipe from the array
+
       updatedRecipes.splice(randomIndex, 1);
-      // return an object, dishes will become an array of objects
       return { guest, recipe: randomRecipe };
     });
 
