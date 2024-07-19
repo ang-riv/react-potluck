@@ -1,11 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import MyButton from "./Button";
 function AssignDishes(props) {
   // TODO: add a try again button and hide the assign dishes button after it is clicked
   return (
     <div ref={props.div}>
-      {/*<h4>GuestList Array's Length: {props.guestList.length}</h4>*/}
+      {/*testing*/}
       <h4>Everyone is bringing...</h4>
       <ul ref={props.ul}>
         {props.dishes.map((dish, index) => (
@@ -14,7 +15,11 @@ function AssignDishes(props) {
           </li>
         ))}
       </ul>
-      <MyButton innerText="Assign Dishes" onClick={props.onClick} />
+      {props.assigned === false ? (
+        <MyButton innerText="Assign Dishes" onClick={props.onClick} />
+      ) : (
+        <MyButton innerText="Try Again?" />
+      )}
     </div>
   );
 }

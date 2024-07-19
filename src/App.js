@@ -22,6 +22,8 @@ function App() {
   const [individualGuestName, setIndividualGuestName] = useState("");
   // for displaying the dishes in a list
   const [dishes, setDishes] = useState([]);
+  // for if the dishes have already been assigned
+  const [assigned, setAssigned] = useState(false);
   // foods that will eventually be replaced with an API (doesn't need to be a state)
   const [recipes, setRecipes] = useState([
     "Pinwheels",
@@ -97,6 +99,7 @@ function App() {
     });
 
     setDishes(newDishes);
+    setAssigned(true);
   };
 
   // spread attributes for props
@@ -120,6 +123,7 @@ function App() {
     ul: listRef,
     onClick: handleDishes,
     dishes: dishes,
+    assigned: assigned,
   };
   return (
     <div className="App">
