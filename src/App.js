@@ -24,13 +24,9 @@ function App() {
   const [dishes, setDishes] = useState([]);
   // for if the dishes have already been assigned
   const [assigned, setAssigned] = useState(false);
-  // foods that will eventually be replaced with an API (doesn't need to be a state)
-  const [recipes, setRecipes] = useState([
-    "Pinwheels",
-    "Mashed Potatoes",
-    "Sliders",
-    "Pasta Salad",
-  ]);
+  // recipe api
+  // recipe names pulled from the recipe api that will change to it's length depending on numOfGuests
+  const recipes = ["Pinwheels", "Mashed Potatoes", "Sliders", "Pasta Salad"];
 
   //** refs
   // using refs to hide whole divs/sections
@@ -44,14 +40,20 @@ function App() {
 
   //** methods
   // allows the text input box to update with the user's input
-  function updateName(e) {
+  const updateName = (e) => {
     let userInput = e.target.value;
     setIndividualGuestName(userInput);
     e.preventDefault();
-  }
+  };
 
   // take in the number of guests and create an array with that number
   const guestNum = (e) => setNumOfGuests(Number(e.target.value));
+
+  // get recipes from api
+  const getRecipeData = async function () {
+    const request = await fetch("");
+    const data = await request.json();
+  };
 
   // hide divs
   const handleHideBtn = () => {
@@ -59,6 +61,8 @@ function App() {
     invitedRef.current.style.display = "none";
     // focus on the input box after btn is clicked
     inputRef.current.focus();
+
+    //? call getRecipeData() here to make that array
   };
 
   // adds names to the guestList array
@@ -89,11 +93,14 @@ function App() {
 
   // assigns dishes to the guests randomly
   const handleDishes = () => {
+    // make copy of array
     const updatedRecipes = [...recipes];
+    // map over the guest list and assign a random recipe to each person on the list
     const newDishes = guestList.map((guest) => {
       const randomIndex = Math.floor(Math.random() * updatedRecipes.length);
       const randomRecipe = updatedRecipes[randomIndex];
 
+      // remove that recipe from the list
       updatedRecipes.splice(randomIndex, 1);
       return { guest, recipe: randomRecipe };
     });

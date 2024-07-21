@@ -2,8 +2,9 @@ import React from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import MyButton from "./Button";
+import ConfettiExplosion from "react-confetti-explosion";
 function AssignDishes(props) {
-  // TODO: add a try again button and hide the assign dishes button after it is clicked
+  // TODO: add a try again button and hide the assign dishes button after it is clicked, and add confetti
   return (
     <div ref={props.div}>
       {/*testing*/}
