@@ -56,6 +56,7 @@ function App() {
   };
 
   // hide divs
+  //TODO: rename function
   const handleHideBtn = () => {
     // make sure user made a selection
     invitedRef.current.style.display = "none";
