@@ -41,7 +41,10 @@ function App() {
         );
         const data = await response.json();
         console.log(data);
-        setRecipeTitles(data);
+        // turn into an array of just the titles
+        let result = data.map((element) => element.title);
+        console.log(result);
+        setRecipeTitles(result);
       };
       fetchRecipes();
     }
@@ -110,7 +113,7 @@ function App() {
   // assigns dishes to the guests randomly
   const handleDishes = () => {
     // make copy of array
-    const updatedRecipes = [...recipes];
+    const updatedRecipes = [...recipeTitles];
     // map over the guest list and assign a random recipe to each person on the list
     const newDishes = guestList.map((guest) => {
       const randomIndex = Math.floor(Math.random() * updatedRecipes.length);
@@ -154,11 +157,6 @@ function App() {
       <form>
         <GuestNumber {...guestNumberProps} />
         <h3>Attending: {numOfGuests}</h3>
-        <ol>
-          {recipeTitles.map((recipe) => (
-            <li key={recipe.id}>{recipe.title}</li>
-          ))}
-        </ol>
         <GuestNames {...guestNamesProps} />
         <h3>Sending invites to:</h3>
         <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
