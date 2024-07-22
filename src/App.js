@@ -28,19 +28,19 @@ function App() {
   const [recipeTitles, setRecipeTitles] = useState([]);
   // toggle for calling the api when a btn is pressed
   const [guestNumsSubmitted, setGuestNumsSubmitted] = useState(false);
-  const apiKey = process.env.REACT_APP_SPOONACULAR_API_KEY;
+  const apiKey = process.env.REACT_APP_RECIPE_API_KEY;
   //** api
   useEffect(() => {
     // if the number of guests has been submitted (the btn has been pressed), then call the api
     if (guestNumsSubmitted === true) {
       const fetchRecipes = async () => {
         const response = await fetch(
-          `https://jsonplaceholder.typicode.com/posts?_limit=${numOfGuests}`
+          `https://api.spoonacular.com/recipes/random?number=${numOfGuests}&apiKey=${apiKey}`
         );
         const data = await response.json();
         console.log(data);
         // turn into an array of just the titles
-        let result = data.map((element) => element.title);
+        let result = data.recipes.map((element) => element.title);
         console.log(result);
         setRecipeTitles(result);
       };
