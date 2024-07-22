@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
 // stylesheets
@@ -24,9 +24,28 @@ function App() {
   const [dishes, setDishes] = useState([]);
   // for if the dishes have already been assigned
   const [assigned, setAssigned] = useState(false);
-  // recipe api
+  // holds data pulled from recipe api
+  const [recipeTitles, setRecipeTitles] = useState([]);
+  // toggle for calling the api when a btn is pressed
+  const [guestNumsSubmitted, setGuestNumsSubmitted] = useState(false);
   // recipe names pulled from the recipe api that will change to it's length depending on numOfGuests
   const recipes = ["Pinwheels", "Mashed Potatoes", "Sliders", "Pasta Salad"];
+
+  //** effect/api
+  useEffect(() => {
+    // if the number of guests has been submitted (the btn has been pressed), then call the api
+    if (guestNumsSubmitted === false) {
+      const fetchRecipes = async () => {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/posts?_limit=5"
+        );
+        const data = await response.json();
+        console.log(data);
+        setRecipeTitles(data);
+      };
+      fetchRecipes();
+    }
+  }, [guestNumsSubmitted === false]);
 
   //** refs
   // using refs to hide whole divs/sections
@@ -49,12 +68,6 @@ function App() {
   // take in the number of guests and create an array with that number
   const guestNum = (e) => setNumOfGuests(Number(e.target.value));
 
-  // get recipes from api
-  const getRecipeData = async function () {
-    const request = await fetch("");
-    const data = await request.json();
-  };
-
   // hide divs
   //TODO: rename function
   const handleHideBtn = () => {
@@ -63,6 +76,8 @@ function App() {
     // focus on the input box after btn is clicked
     inputRef.current.focus();
 
+    //testing
+    setGuestNumsSubmitted(!guestNumsSubmitted);
     //? call getRecipeData() here to make that array
   };
 
@@ -139,6 +154,11 @@ function App() {
       <form>
         <GuestNumber {...guestNumberProps} />
         <h3>Attending: {numOfGuests}</h3>
+        <ol>
+          {recipeTitles.map((recipe) => (
+            <li key={recipe.id}>{recipe.title}</li>
+          ))}
+        </ol>
         <GuestNames {...guestNamesProps} />
         <h3>Sending invites to:</h3>
         <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
