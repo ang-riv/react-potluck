@@ -176,9 +176,9 @@ function App() {
         <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
         <AssignDishes {...assignedDishesProps} />
         {assigned === false ? (
-          <MyButton innerText="Assign Dishes1" onClick={handleDishes} />
+          <MyButton innerText="Assign Dishes" onClick={handleDishes} />
         ) : (
-          <Button type="submit">Try Again1?</Button>
+          <Button type="submit">Try Again</Button>
         )}
       </form>
     </div>
