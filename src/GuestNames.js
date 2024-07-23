@@ -5,7 +5,12 @@ function GuestNames(props) {
   return (
     <div ref={props.div}>
       <h3>Enter each name of your guests: </h3>
-      <input ref={props.inputRef} type="text" onChange={props.onChange}></input>
+      <input
+        ref={props.inputRef}
+        type="text"
+        onChange={props.onChange}
+        onKeyDown={props.onKeyDown}
+      ></input>
       <br />
       <MyButton
         section="names"

@@ -19,7 +19,10 @@ function AssignDishes(props) {
       {props.assigned === false ? (
         <MyButton innerText="Assign Dishes" onClick={props.onClick} />
       ) : (
-        <MyButton innerText="Try Again?" />
+        <>
+          <Button disabled>Assign Dishes</Button>
+          <Button>Try Again?</Button>
+        </>
       )}
     </div>
   );

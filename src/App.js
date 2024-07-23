@@ -82,7 +82,8 @@ function App() {
   };
 
   // adds names to the guestList array
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     // empty the input box after each name is entered + focus input box
     if (inputRef.current) {
       inputRef.current.value = "";
@@ -125,6 +126,12 @@ function App() {
     setAssigned(true);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      inputRef.current.focus();
+    }
+  };
   // spread attributes for props
   const guestNumberProps = {
     div: invitedRef,
@@ -140,6 +147,7 @@ function App() {
     onClick: handleClick,
     namesList: namesList,
     name: individualGuestName,
+    onKeyDown: handleKeyDown,
   };
   const assignedDishesProps = {
     div: assignedDishesRef,
