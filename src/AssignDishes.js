@@ -5,7 +5,6 @@ import MyButton from "./Button";
 function AssignDishes(props) {
   return (
     <div ref={props.div}>
-      {/*testing*/}
       <h4>Everyone is bringing...</h4>
       <ul ref={props.ul}>
         {props.dishes.map((dish, index) => (
@@ -14,13 +13,6 @@ function AssignDishes(props) {
           </li>
         ))}
       </ul>
-      {props.assigned === false ? (
-        <MyButton innerText="Assign Dishes" onClick={props.onClick} />
-      ) : (
-        <>
-          <Button>Try Again?</Button>
-        </>
-      )}
     </div>
   );
 }

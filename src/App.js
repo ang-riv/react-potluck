@@ -9,6 +9,8 @@ import Header from "./Header.js";
 import GuestNumber from "./GuestNumber.js";
 import GuestNames from "./GuestNames.js";
 import AssignDishes from "./AssignDishes.js";
+import MyButton from "./Button.js";
+import Button from "react-bootstrap/Button";
 
 function App() {
   //** states
@@ -28,7 +30,9 @@ function App() {
   const [recipeTitles, setRecipeTitles] = useState([]);
   // toggle for calling the api when a btn is pressed
   const [guestNumsSubmitted, setGuestNumsSubmitted] = useState(false);
+
   const apiKey = process.env.REACT_APP_RECIPE_API_KEY;
+
   //** api
   useEffect(() => {
     // if the number of guests has been submitted (the btn has been pressed), then call the api
@@ -126,12 +130,14 @@ function App() {
     setAssigned(true);
   };
 
+  // prevent the user from submitting names with enter
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       inputRef.current.focus();
     }
   };
+
   // spread attributes for props
   const guestNumberProps = {
     div: invitedRef,
@@ -140,6 +146,7 @@ function App() {
     onClick: handleHideBtn,
     num: numOfGuests,
   };
+
   const guestNamesProps = {
     div: guestNameInputRef,
     inputRef: inputRef,
@@ -149,6 +156,7 @@ function App() {
     name: individualGuestName,
     onKeyDown: handleKeyDown,
   };
+
   const assignedDishesProps = {
     div: assignedDishesRef,
     ul: listRef,
@@ -156,6 +164,7 @@ function App() {
     dishes: dishes,
     assigned: assigned,
   };
+
   return (
     <div className="App">
       <Header />
@@ -166,6 +175,11 @@ function App() {
         <h3>Sending invites to:</h3>
         <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
         <AssignDishes {...assignedDishesProps} />
+        {assigned === false ? (
+          <MyButton innerText="Assign Dishes1" onClick={handleDishes} />
+        ) : (
+          <Button type="submit">Try Again1?</Button>
+        )}
       </form>
     </div>
   );
