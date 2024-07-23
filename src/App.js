@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
+import confetti from "canvas-confetti";
 // stylesheets
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.js";
@@ -126,8 +127,12 @@ function App() {
       return { guest, recipe: randomRecipe };
     });
 
+    // new states
     setDishes(newDishes);
     setAssigned(true);
+
+    // some fun confetti
+    confetti({ spread: 180 });
   };
 
   // prevent the user from submitting names with enter
