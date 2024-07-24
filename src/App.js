@@ -14,7 +14,7 @@ import MyButton from "./MyButton.js";
 import Button from "react-bootstrap/Button";
 
 function App() {
-  //** states
+  //****  states ****/
   // number of guests
   const [numOfGuests, setNumOfGuests] = useState(0);
   // array of guest's names
@@ -36,7 +36,8 @@ function App() {
 
   //** api key
   const apiKey = process.env.REACT_APP_RECIPE_API_KEY;
-  //** api
+
+  //****  api ****/
   useEffect(() => {
     // if the number of guests has been submitted (the btn has been pressed), then call the api
     if (numSubmitted === true) {
@@ -55,7 +56,7 @@ function App() {
     }
   }, [apiKey, numOfGuests, numSubmitted]);
 
-  //** refs
+  //****  refs ****/
   // using refs to hide whole divs/sections
   const guestNameInputRef = useRef(null);
   const invitedRef = useRef(null);
@@ -64,14 +65,9 @@ function App() {
   const listRef = useRef(null);
   const inputRef = useRef(null);
 
-  //** methods
-  // allows the text input box to update with the user's input
-  const updateName = (e) => {
-    let userInput = e.target.value;
-    setIndividualGuestName(userInput);
-    e.preventDefault();
-  };
+  //****  methods ****/
 
+  //** invited section/ guest number
   // for dropdown menu, takes in the number of guests and creates an array with that number
   const handleChange = (e) => setNumOfGuests(Number(e.target.value));
 
@@ -84,6 +80,22 @@ function App() {
 
     // checks if the guest nums have been entered/this btn was clicked to trigger the api call
     setnumSubmitted(!numSubmitted);
+  };
+
+  //** names section/ guest names
+  // allows the text input box to update with the user's input
+  const updateName = (e) => {
+    let userInput = e.target.value;
+    setIndividualGuestName(userInput);
+    e.preventDefault();
+  };
+
+  // prevent the user from submitting names with enter
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      inputRef.current.focus();
+    }
   };
 
   // adds names to the guestList array
@@ -101,7 +113,6 @@ function App() {
     if (guestList.length < numOfGuests) {
       // make a copy of that array then add the name to the beginning
       const newArr = [...guestList, individualGuestName];
-
       setGuestList(newArr);
 
       // hide the button after the last person is added to the array
@@ -113,6 +124,7 @@ function App() {
     }
   };
 
+  //** assign section/ assign dishes
   // assigns dishes/recipes to the guests randomly
   const handleDishes = () => {
     // make copy of array
@@ -135,20 +147,13 @@ function App() {
     confetti({ spread: 180 });
   };
 
-  // prevent the user from submitting names with enter
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      inputRef.current.focus();
-    }
-  };
-
+  //** resetting the form with submit
   // tests to see what state everything is in during the try again method
   const handleSubmit = () => {
     setTryAgain(!tryAgain);
   };
 
-  // spread attributes for props
+  //** component props
   const guestNumberProps = {
     div: invitedRef,
     onChange: handleChange,
@@ -183,7 +188,7 @@ function App() {
         <h3>Sending invites to:</h3>
         <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
         <AssignDishes {...assignDishesProps} />
-
+        {/* assign dishes/try again button */}
         {assigned === false ? (
           <MyButton
             innerText="Assign Dishes"
