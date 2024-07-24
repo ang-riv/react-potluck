@@ -31,6 +31,8 @@ function App() {
   const [recipeTitles, setRecipeTitles] = useState([]);
   // toggle for calling the api when a btn is pressed
   const [guestNumsSubmitted, setGuestNumsSubmitted] = useState(false);
+  // resetting everything for when the form is submitted
+  const [tryAgain, setTryAgain] = useState(false);
 
   const apiKey = process.env.REACT_APP_RECIPE_API_KEY;
 
@@ -84,6 +86,11 @@ function App() {
 
     //testing
     setGuestNumsSubmitted(!guestNumsSubmitted);
+    if (tryAgain) {
+      console.log(
+        `In try again stage and guestNumsSubmitted is ${guestNumsSubmitted}`
+      );
+    }
   };
 
   // adds names to the guestList array
@@ -143,6 +150,10 @@ function App() {
     }
   };
 
+  // tests to see what state everything is in during the try again method
+  const handleSubmit = () => {
+    setTryAgain(!tryAgain);
+  };
   // spread attributes for props
   const guestNumberProps = {
     div: invitedRef,
@@ -173,17 +184,21 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <form>
+      <form onSubmit={handleSubmit}>
         <GuestNumber {...guestNumberProps} />
         <h3>Attending: {numOfGuests}</h3>
         <GuestNames {...guestNamesProps} />
         <h3>Sending invites to:</h3>
         <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
         <AssignDishes {...assignedDishesProps} />
+
         {assigned === false ? (
           <MyButton innerText="Assign Dishes" onClick={handleDishes} />
         ) : (
-          <Button type="submit">Try Again</Button>
+          <>
+            <h5>Have a great potluck!</h5>
+            <Button type="submit">Try Again</Button>
+          </>
         )}
       </form>
     </div>
