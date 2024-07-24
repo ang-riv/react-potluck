@@ -23,10 +23,10 @@ function MyButton(props) {
       );
     }
   } else if (props.section === "names") {
-    // guest names sections
+    // guest names section
     // if individualguestname is nothing then do the modal again like above, then if not then do the regular onClick stuff
     if (props.name === "" || !lettersOnly) {
-      return <ErrorModal innerText={innerText} section={props.names} />;
+      return <ErrorModal innerText={innerText} section={props.section} />;
     } else {
       return (
         <>
@@ -36,14 +36,20 @@ function MyButton(props) {
         </>
       );
     }
-  } else {
-    return (
-      <>
-        <Button variant="primary" onClick={props.onClick}>
-          {innerText}
-        </Button>
-      </>
-    );
+  } else if (props.section === "assign") {
+    // assign dishes section
+    // if the guestlist is empty then return the modal
+    if (props.guestList === 0) {
+      return <ErrorModal innerText={innerText} section={props.section} />;
+    } else {
+      return (
+        <>
+          <Button variant="primary" onClick={props.onClick}>
+            {innerText}
+          </Button>
+        </>
+      );
+    }
   }
 }
 export default MyButton;

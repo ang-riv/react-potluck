@@ -12,13 +12,14 @@ function ErrorModal(props) {
   const invalidNum = "Please chose the number of guests that are attending.";
   const invalidName =
     "Please enter a name into the input box. Must contain only letters.";
-
+  const invalidAssign =
+    "Guest list is empty. Please add each of your guests' names into the second section. You can't assign dishes if you have no guests to assign them to!";
   const handleClose = () => setShow(false);
   function handleShow() {
     setShow(true);
-    props.section === "invited"
-      ? setModalText(invalidNum)
-      : setModalText(invalidName);
+    if (props.section === "invited") setModalText(invalidNum);
+    if (props.section === "assign") setModalText(invalidAssign);
+    if (props.section === "names") setModalText(invalidName);
   }
 
   return (

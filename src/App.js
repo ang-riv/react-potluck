@@ -170,7 +170,6 @@ function App() {
   const assignDishesProps = {
     div: assignDishesRef,
     ul: listRef,
-    onClick: handleDishes,
     dishes: dishes,
     assigned: assigned,
   };
@@ -187,7 +186,12 @@ function App() {
         <AssignDishes {...assignDishesProps} />
 
         {assigned === false ? (
-          <MyButton innerText="Assign Dishes" onClick={handleDishes} />
+          <MyButton
+            innerText="Assign Dishes"
+            onClick={handleDishes}
+            section="assign"
+            guestList={guestList.length}
+          />
         ) : (
           <>
             <h5>Have a great potluck!</h5>
