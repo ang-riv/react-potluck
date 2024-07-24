@@ -73,23 +73,22 @@ function App() {
     e.preventDefault();
   };
 
-  // take in the number of guests and create an array with that number
-  const guestNum = (e) => setNumOfGuests(Number(e.target.value));
+  // for dropdown menu, takes in the number of guests and creates an array with that number
+  const handleChange = (e) => setNumOfGuests(Number(e.target.value));
 
-  // hide divs
-  //TODO: rename function
-  const handleHideBtn = () => {
+  // hide divs + check
+  const handleGuestNum = () => {
     // make sure user made a selection
     invitedRef.current.style.display = "none";
     // focus on the input box after btn is clicked
     inputRef.current.focus();
 
-    //testing
+    // checks if the guest nums have been entered/this btn was clicked to trigger the api call
     setnumSubmitted(!numSubmitted);
   };
 
   // adds names to the guestList array
-  const handleClick = (e) => {
+  const handleGuestNames = (e) => {
     e.preventDefault();
     // empty the input box after each name is entered + focus input box
     if (inputRef.current) {
@@ -115,7 +114,7 @@ function App() {
     }
   };
 
-  // assigns dishes to the guests randomly
+  // assigns dishes/recipes to the guests randomly
   const handleDishes = () => {
     // make copy of array
     const updatedRecipes = [...recipes];
@@ -149,11 +148,12 @@ function App() {
   const handleSubmit = () => {
     setTryAgain(!tryAgain);
   };
+
   // spread attributes for props
   const guestNumberProps = {
     div: invitedRef,
-    onChange: guestNum,
-    onClick: handleHideBtn,
+    onChange: handleChange,
+    onClick: handleGuestNum,
     num: numOfGuests,
   };
 
@@ -161,7 +161,7 @@ function App() {
     div: guestNameInputRef,
     inputRef: inputRef,
     onChange: updateName,
-    onClick: handleClick,
+    onClick: handleGuestNames,
     namesList: namesList,
     name: individualGuestName,
     onKeyDown: handleKeyDown,
