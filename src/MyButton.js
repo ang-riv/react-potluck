@@ -1,3 +1,4 @@
+// named MyButton to prevent conflicts with bootstrap's button
 import React from "react";
 import "bootstrap/dist/js/bootstrap.js";
 import Button from "react-bootstrap/Button";

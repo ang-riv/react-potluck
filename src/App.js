@@ -10,7 +10,7 @@ import Header from "./Header.js";
 import GuestNumber from "./GuestNumber.js";
 import GuestNames from "./GuestNames.js";
 import AssignDishes from "./AssignDishes.js";
-import MyButton from "./Button.js";
+import MyButton from "./MyButton.js";
 import Button from "react-bootstrap/Button";
 
 function App() {

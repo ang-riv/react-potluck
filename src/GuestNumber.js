@@ -1,5 +1,5 @@
 import React from "react";
-import MyButton from "./Button.js";
+import MyButton from "./MyButton.js";
 function GuestNumber(props) {
   const dropDownStyle = {
     padding: "0.375rem 0.75rem",

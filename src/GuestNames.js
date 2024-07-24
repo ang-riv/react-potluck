@@ -1,5 +1,5 @@
 import React from "react";
-import MyButton from "./Button.js";
+import MyButton from "./MyButton.js";
 
 function GuestNames(props) {
   return (
