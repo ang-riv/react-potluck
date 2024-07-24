@@ -36,7 +36,6 @@ function App() {
 
   //** api key
   const apiKey = process.env.REACT_APP_RECIPE_API_KEY;
-
   //** api
   useEffect(() => {
     // if the number of guests has been submitted (the btn has been pressed), then call the api
@@ -54,7 +53,7 @@ function App() {
       };
       fetchRecipes();
     }
-  }, [numSubmitted === true]);
+  }, [apiKey, numOfGuests, numSubmitted]);
 
   //** refs
   // using refs to hide whole divs/sections
