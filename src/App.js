@@ -86,11 +86,6 @@ function App() {
 
     //testing
     setGuestNumsSubmitted(!guestNumsSubmitted);
-    if (tryAgain) {
-      console.log(
-        `In try again stage and guestNumsSubmitted is ${guestNumsSubmitted}`
-      );
-    }
   };
 
   // adds names to the guestList array

@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/js/bootstrap.js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 

@@ -1,19 +1,12 @@
 import React from "react";
 import "bootstrap/dist/js/bootstrap.js";
-import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import ErrorModal from "./ErrorModal";
 
 function MyButton(props) {
-  // states
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   // innertext of the btns
   const innerText = props.innerText;
-  // TODO: add in a prop for the innertext
+
   // for the guest name section to test if their entry is just letters, spaces, and hyphens for hyphenated names
   const lettersOnly = /^[a-zA-Z\s-]*$/.test(props.name);
 
