@@ -28,41 +28,41 @@ function App() {
   // for if the dishes have already been assigned
   const [assigned, setAssigned] = useState(false);
   // holds data pulled from recipe api
-  const [recipeTitles, setRecipeTitles] = useState([]);
-  // toggle for calling the api when a btn is pressed
-  const [guestNumsSubmitted, setGuestNumsSubmitted] = useState(false);
+  const [recipes, setRecipes] = useState([]);
+  // toggle for calling the api when a btn is pressed/the number of guests have been submitted
+  const [numSubmitted, setnumSubmitted] = useState(false);
   // resetting everything for when the form is submitted
   const [tryAgain, setTryAgain] = useState(false);
 
+  //** api key
   const apiKey = process.env.REACT_APP_RECIPE_API_KEY;
 
   //** api
   useEffect(() => {
     // if the number of guests has been submitted (the btn has been pressed), then call the api
-    if (guestNumsSubmitted === true) {
+    if (numSubmitted === true) {
       const fetchRecipes = async () => {
         const response = await fetch(
           `https://api.spoonacular.com/recipes/random?number=${numOfGuests}&apiKey=${apiKey}`
         );
         const data = await response.json();
         console.log(data);
-        // turn into an array of just the titles
+        // turn into an array of just the recipe titles
         let result = data.recipes.map((element) => element.title);
         console.log(result);
-        setRecipeTitles(result);
+        setRecipes(result);
       };
       fetchRecipes();
     }
-  }, [guestNumsSubmitted === true]);
+  }, [numSubmitted === true]);
 
   //** refs
   // using refs to hide whole divs/sections
   const guestNameInputRef = useRef(null);
   const invitedRef = useRef(null);
-  const assignedDishesRef = useRef(null);
+  const assignDishesRef = useRef(null);
   // individual elements
   const listRef = useRef(null);
-  const numErrorRef = useRef(null);
   const inputRef = useRef(null);
 
   //** methods
@@ -85,7 +85,7 @@ function App() {
     inputRef.current.focus();
 
     //testing
-    setGuestNumsSubmitted(!guestNumsSubmitted);
+    setnumSubmitted(!numSubmitted);
   };
 
   // adds names to the guestList array
@@ -118,7 +118,7 @@ function App() {
   // assigns dishes to the guests randomly
   const handleDishes = () => {
     // make copy of array
-    const updatedRecipes = [...recipeTitles];
+    const updatedRecipes = [...recipes];
     // map over the guest list and assign a random recipe to each person on the list
     const newDishes = guestList.map((guest) => {
       const randomIndex = Math.floor(Math.random() * updatedRecipes.length);
@@ -152,7 +152,6 @@ function App() {
   // spread attributes for props
   const guestNumberProps = {
     div: invitedRef,
-    errorMessage: numErrorRef,
     onChange: guestNum,
     onClick: handleHideBtn,
     num: numOfGuests,
@@ -168,8 +167,8 @@ function App() {
     onKeyDown: handleKeyDown,
   };
 
-  const assignedDishesProps = {
-    div: assignedDishesRef,
+  const assignDishesProps = {
+    div: assignDishesRef,
     ul: listRef,
     onClick: handleDishes,
     dishes: dishes,
@@ -185,7 +184,7 @@ function App() {
         <GuestNames {...guestNamesProps} />
         <h3>Sending invites to:</h3>
         <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
-        <AssignDishes {...assignedDishesProps} />
+        <AssignDishes {...assignDishesProps} />
 
         {assigned === false ? (
           <MyButton innerText="Assign Dishes" onClick={handleDishes} />
