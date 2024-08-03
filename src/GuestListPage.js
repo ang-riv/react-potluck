@@ -1,11 +1,15 @@
 import React from "react";
+import { useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
+import MyButton from "./MyButton.js";
+import { displayNames } from "./Display.js";
 
 function GuestListPage(props) {
-  //const names = displayNames();
+  const names = displayNames(props.num);
+
   return (
     <Container
       fluid
@@ -19,10 +23,20 @@ function GuestListPage(props) {
             </Form.Label>
             <Stack direction="horizontal" gap={3}>
               <Form.Control
+                ref={props.inputRef}
                 className="me-auto"
                 placeholder="Enter name here..."
+                onChange={props.onChange}
+                onKeyDown={props.onKeyDown}
               ></Form.Control>
-              <button className="px-3 py-1 button-styles">Submit</button>
+              <MyButton
+                className="py-1 button-styles"
+                onClick={props.onClick}
+                section="names"
+                num={props.num}
+                name={props.name}
+                innerText="Submit"
+              />
             </Stack>
           </Form.Group>
         </Form>
@@ -30,7 +44,7 @@ function GuestListPage(props) {
       <Row className="mb-1">
         <h4>Sending invites to...</h4>
       </Row>
-      {/*names*/}
+      {names}
       <Container className="d-flex justify-content-center align-items-center">
         <button
           className="mt-4 px-5 py-2 button-styles"

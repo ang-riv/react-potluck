@@ -107,7 +107,8 @@ function App() {
     setStartPage(false);
     setNumPage(false);
     setListPage(true);
-    console.log("Name submitted");
+    console.log("Num submitted");
+    console.log(guestList);
     // checks if the guest nums have been entered/this btn was clicked to trigger the api call
     //setnumSubmitted(!numSubmitted);
   };
@@ -124,19 +125,21 @@ function App() {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      inputRef.current.focus();
     }
   };
 
   // adds names to the guestList array
   const handleGuestNames = (e) => {
     e.preventDefault();
+    console.log("Clicked");
+    console.log(guestList);
     // empty the input box after each name is entered + focus input box
     if (inputRef.current) {
       inputRef.current.value = "";
       inputRef.current.focus();
     }
 
+    // TODO: change to guestList full or something
     const hideBtn = numOfGuests - 1;
 
     // if the amount of people they are inputting into the array is less than the amount of people they said were going, then add them to the array
@@ -145,6 +148,7 @@ function App() {
       const newArr = [...guestList, individualGuestName];
       setGuestList(newArr);
 
+      // TODO: hide the button and show guestlist full and the assign dishes button
       // hide the button after the last person is added to the array
       if (guestList.length === hideBtn) {
         if (guestNameInputRef.current) {
@@ -221,7 +225,17 @@ function App() {
               num={numOfGuests}
             />
           )}
-          {listPage && <GuestListPage />}
+          {listPage && (
+            <GuestListPage
+              inputRef={inputRef}
+              onChange={updateName}
+              onClick={handleGuestNames}
+              onKeyDown={handleKeyDown}
+              guestList={guestList}
+              num={numOfGuests}
+              name={individualGuestName}
+            />
+          )}
         </div>
       </div>
     );

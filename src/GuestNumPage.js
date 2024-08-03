@@ -28,7 +28,7 @@ function GuestNumPage(props) {
           {/* add stack group here maybe */}
           <Col xs={8} className="mb-4">
             <Form.Select onChange={props.onChange}>
-              <option>Select a number: </option>
+              <option value={0}>Select a number: </option>
               {options}
             </Form.Select>
           </Col>
@@ -36,9 +36,9 @@ function GuestNumPage(props) {
           <MyButton
             className="mt-3 px-5 py-2 button-styles"
             onClick={props.onClick}
-            section="invited"
+            section="names"
             num={props.num}
-            innerText="GuestNums!!!"
+            innerText="Submit Guests"
           />
         </Form.Group>
       </Form>
