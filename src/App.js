@@ -14,6 +14,7 @@ import AssignDishes from "./AssignDishes.js";
 import MyButton from "./MyButton.js";
 import Button from "react-bootstrap/Button";
 import GuestNumPage from "./GuestNumPage.js";
+import GuestListPage from "./GuestListPage.js";
 
 function App() {
   //*** testing stuff***/
@@ -21,6 +22,14 @@ function App() {
   //***  page change states ***/
   const [startPage, setStartPage] = useState(true);
   const [numPage, setNumPage] = useState(false);
+  const [listPage, setListPage] = useState(false);
+  const testRecipes = [
+    "Tacos",
+    "Sandwiches",
+    "Deviled Eggs",
+    "Kimbap",
+    "Cookies",
+  ];
 
   //****  states ****/
   // number of guests
@@ -48,7 +57,7 @@ function App() {
   //****  api ****/
   useEffect(() => {
     // if the number of guests has been submitted (the btn has been pressed), then call the api
-    if (numSubmitted === true) {
+    if (numSubmitted === true && test === false) {
       const fetchRecipes = async () => {
         const response = await fetch(
           `https://api.spoonacular.com/recipes/random?number=${numOfGuests}&apiKey=${apiKey}`
@@ -76,24 +85,31 @@ function App() {
   //****  methods ****/
 
   //*** page change methods ***/
-  const handleStart = () => {
+  const handleStartPage = () => {
     setStartPage(false);
     setNumPage(true);
   };
 
   //** invited section/ guest number
   // for dropdown menu, takes in the number of guests and creates an array with that number
-  const handleChange = (e) => setNumOfGuests(Number(e.target.value));
+  const handleDropdown = (e) => setNumOfGuests(Number(e.target.value));
 
   // hide divs + check
-  const handleGuestNum = () => {
+  const handleGuestNum = (e) => {
+    // TODO: Get rid of this later?
     // make sure user made a selection
-    invitedRef.current.style.display = "none";
+    //invitedRef.current.style.display = "none";
     // focus on the input box after btn is clicked
-    inputRef.current.focus();
+    //inputRef.current.focus();
+    e.preventDefault();
 
+    //? page change stuff
+    setStartPage(false);
+    setNumPage(false);
+    setListPage(true);
+    console.log("Name submitted");
     // checks if the guest nums have been entered/this btn was clicked to trigger the api call
-    setnumSubmitted(!numSubmitted);
+    //setnumSubmitted(!numSubmitted);
   };
 
   //** names section/ guest names
@@ -170,7 +186,7 @@ function App() {
   //** component props
   const guestNumberProps = {
     div: invitedRef,
-    onChange: handleChange,
+    onChange: handleDropdown,
     onClick: handleGuestNum,
     num: numOfGuests,
   };
@@ -197,15 +213,21 @@ function App() {
     return (
       <div className="App">
         <div className="border border-primary position-styles">
-          {startPage && <StartPage onClick={handleStart} />}
-          {numPage && <GuestNumPage />}
+          {startPage && <StartPage onClick={handleStartPage} />}
+          {numPage && (
+            <GuestNumPage
+              onChange={handleDropdown}
+              onClick={handleGuestNum}
+              num={numOfGuests}
+            />
+          )}
+          {listPage && <GuestListPage />}
         </div>
       </div>
     );
   } else {
     return (
       <div className="App">
-        <StartPage />
         <form onSubmit={handleSubmit}>
           <GuestNumber {...guestNumberProps} />
           <h3>Attending: {numOfGuests}</h3>

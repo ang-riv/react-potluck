@@ -17,9 +17,12 @@ function MyButton(props) {
       return <ErrorModal innerText={innerText} section={props.section} />;
     } else {
       return (
-        <Button variant="primary" onClick={props.onClick}>
+        <button
+          className="mt-3 px-5 py-2 button-styles"
+          onClick={props.onClick}
+        >
           {innerText}
-        </Button>
+        </button>
       );
     }
   } else if (props.section === "names") {
@@ -30,9 +33,7 @@ function MyButton(props) {
     } else {
       return (
         <>
-          <Button variant="primary" onClick={props.onClick}>
-            {innerText}
-          </Button>
+          <button onClick={props.onClick}>{innerText}</button>
         </>
       );
     }
@@ -44,9 +45,7 @@ function MyButton(props) {
     } else {
       return (
         <>
-          <Button variant="primary" onClick={props.onClick}>
-            {innerText}
-          </Button>
+          <button onClick={props.onClick}>{innerText}</button>
         </>
       );
     }

@@ -27,7 +27,7 @@ function GuestNumber(props) {
       <MyButton
         num={props.num}
         onClick={props.onClick}
-        innerText="Submit Guests"
+        innerText="Submit Guests!!"
         section="invited"
       />
     </div>
