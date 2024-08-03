@@ -18,10 +18,10 @@ h5 {
 }
 
 .position-styles {
-  height: "100vh";
-  display: "flex";
-  align-items: "center";
-  justify-content: "center";
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-container-border {

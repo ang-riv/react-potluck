@@ -13,10 +13,15 @@ import GuestNames from "./GuestNames.js";
 import AssignDishes from "./AssignDishes.js";
 import MyButton from "./MyButton.js";
 import Button from "react-bootstrap/Button";
+import GuestNumPage from "./GuestNumPage.js";
 
 function App() {
   //*** testing stuff***/
   const test = true;
+  //***  page change states ***/
+  const [startPage, setStartPage] = useState(true);
+  const [numPage, setNumPage] = useState(false);
+
   //****  states ****/
   // number of guests
   const [numOfGuests, setNumOfGuests] = useState(0);
@@ -70,11 +75,10 @@ function App() {
 
   //****  methods ****/
 
-  const positionStyles = {
-    height: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+  //*** page change methods ***/
+  const handleStart = () => {
+    setStartPage(false);
+    setNumPage(true);
   };
 
   //** invited section/ guest number
@@ -192,8 +196,9 @@ function App() {
   if (test) {
     return (
       <div className="App">
-        <div className="border border-primary" styles={positionStyles}>
-          <StartPage />
+        <div className="border border-primary position-styles">
+          {startPage && <StartPage onClick={handleStart} />}
+          {numPage && <GuestNumPage />}
         </div>
       </div>
     );
