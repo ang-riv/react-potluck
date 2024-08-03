@@ -20,7 +20,7 @@ function DisplayNames(props) {
     </Col>
   ));
   return (
-    <div className="main-container-border scrollable-div names-div-height p-2 rounded">
+    <div className="main-container-border scrollable-div names-div p-2 rounded">
       <Row>{nameBlocks}</Row>
     </div>
   );

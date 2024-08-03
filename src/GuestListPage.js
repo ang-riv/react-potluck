@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 import MyButton from "./MyButton.js";
 import DisplayNames from "./DisplayNames.js";
-import PropTypes from "prop-types";
 
 function GuestListPage(props) {
   //const names = displayNames(props.num);

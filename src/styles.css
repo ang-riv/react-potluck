@@ -43,7 +43,9 @@ h5 {
 }
 
 /* heights */
-.names-div-height {
+.names-div {
+  min-width: 350px;
+  min-height: 220px;
   max-height: 225px;
 }
 

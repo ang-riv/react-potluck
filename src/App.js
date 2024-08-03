@@ -150,8 +150,10 @@ function App() {
       // TODO: hide the button and show guestlist full and the assign dishes button
       // hide the button after the last person is added to the array
       if (guestList.length === hideBtn) {
-        if (guestNameInputRef.current) {
-          guestNameInputRef.current.style.display = "none";
+        console.log("full");
+        if (inputRef.current) {
+          inputRef.current.disabled = true;
+          inputRef.current.placeholder = "Guest list full!";
         }
       }
     }
