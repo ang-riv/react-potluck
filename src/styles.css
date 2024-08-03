@@ -1,0 +1,92 @@
+/* for overriding some of bootstrap's styles */
+p,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Open Sans", sans-serif;
+}
+
+.accent-color {
+  background-color: #ffb961;
+}
+
+.main-title {
+  font-family: "Lobster Two", sans-serif;
+  font-weight: bolder;
+  text-decoration: #ffc107 wavy underline;
+}
+
+.position-styles {
+  height: "100vh";
+  display: "flex";
+  align-items: "center";
+  justify-content: "center";
+}
+
+.main-container-border {
+  border: 2px solid #ffc107;
+}
+
+.button-styles {
+  border-radius: 15px;
+  border: 2px solid #ffc107;
+  background-color: #ffc107;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+}
+
+.scrollable-div {
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #f9f9f9;
+}
+
+/* heights */
+.names-div-height {
+  max-height: 225px;
+}
+
+.recipes-div-height {
+  max-height: 425px;
+}
+
+/* getting rid of the border on smaller screens + adjusting the margins on the recipe cards*/
+@media (max-width: 575px) {
+  .container-breakpoint,
+  .recipe-container-breakpoint {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+/* main container tablet and laptop media queries, preventing the container from stretching too wide */
+@media (min-width: 575px) and (max-width: 1023px) {
+  .container-breakpoint {
+    max-width: 65%;
+    height: 50%;
+    box-shadow: 10px 10px 15px -1px rgba(224, 221, 224, 1);
+  }
+  .recipe-container-breakpoint {
+    max-width: 80%;
+    height: 60%;
+    box-shadow: 10px 10px 15px -1px rgba(224, 221, 224, 1);
+  }
+}
+
+/* for desktop screens*/
+@media (min-width: 1024px) {
+  .container-breakpoint {
+    max-width: 600px;
+    height: 550px;
+    box-shadow: 10px 10px 15px -1px rgba(224, 221, 224, 1);
+  }
+  .recipe-container-breakpoint {
+    max-width: 800px;
+    max-height: 640px;
+    box-shadow: 10px 10px 15px -1px rgba(224, 221, 224, 1);
+  }
+  .recipes-div-height {
+    max-height: 500px;
+  }
+}

@@ -3,10 +3,11 @@ import { useState } from "react";
 import { useRef } from "react";
 import confetti from "canvas-confetti";
 // stylesheets
+import "./styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.js";
 // components
-import Header from "./Header.js";
+import StartPage from "./StartPage.js";
 import GuestNumber from "./GuestNumber.js";
 import GuestNames from "./GuestNames.js";
 import AssignDishes from "./AssignDishes.js";
@@ -14,6 +15,8 @@ import MyButton from "./MyButton.js";
 import Button from "react-bootstrap/Button";
 
 function App() {
+  //*** testing stuff***/
+  const test = true;
   //****  states ****/
   // number of guests
   const [numOfGuests, setNumOfGuests] = useState(0);
@@ -66,6 +69,13 @@ function App() {
   const inputRef = useRef(null);
 
   //****  methods ****/
+
+  const positionStyles = {
+    height: "100vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
 
   //** invited section/ guest number
   // for dropdown menu, takes in the number of guests and creates an array with that number
@@ -178,33 +188,44 @@ function App() {
     assigned: assigned,
   };
 
-  return (
-    <div className="App">
-      <Header />
-      <form onSubmit={handleSubmit}>
-        <GuestNumber {...guestNumberProps} />
-        <h3>Attending: {numOfGuests}</h3>
-        <GuestNames {...guestNamesProps} />
-        <h3>Sending invites to:</h3>
-        <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
-        <AssignDishes {...assignDishesProps} />
-        {/* assign dishes/try again button */}
-        {assigned === false ? (
-          <MyButton
-            innerText="Assign Dishes"
-            onClick={handleDishes}
-            section="assign"
-            guestList={guestList.length}
-          />
-        ) : (
-          <>
-            <h5>Have a great potluck!</h5>
-            <Button type="submit">Try Again</Button>
-          </>
-        )}
-      </form>
-    </div>
-  );
+  //*** TESTING ***/
+  if (test) {
+    return (
+      <div className="App">
+        <div className="border border-primary" styles={positionStyles}>
+          <StartPage />
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="App">
+        <StartPage />
+        <form onSubmit={handleSubmit}>
+          <GuestNumber {...guestNumberProps} />
+          <h3>Attending: {numOfGuests}</h3>
+          <GuestNames {...guestNamesProps} />
+          <h3>Sending invites to:</h3>
+          <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
+          <AssignDishes {...assignDishesProps} />
+          {/* assign dishes/try again button */}
+          {assigned === false ? (
+            <MyButton
+              innerText="Assign Dishes"
+              onClick={handleDishes}
+              section="assign"
+              guestList={guestList.length}
+            />
+          ) : (
+            <>
+              <h5>Have a great potluck!</h5>
+              <Button type="submit">Try Again</Button>
+            </>
+          )}
+        </form>
+      </div>
+    );
+  }
 }
 
 export default App;
