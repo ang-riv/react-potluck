@@ -108,7 +108,7 @@ function App() {
     setNumPage(false);
     setListPage(true);
     console.log("Num submitted");
-    console.log(guestList);
+    //console.log(guestList);
     // checks if the guest nums have been entered/this btn was clicked to trigger the api call
     //setnumSubmitted(!numSubmitted);
   };
@@ -132,7 +132,6 @@ function App() {
   const handleGuestNames = (e) => {
     e.preventDefault();
     console.log("Clicked");
-    console.log(guestList);
     // empty the input box after each name is entered + focus input box
     if (inputRef.current) {
       inputRef.current.value = "";

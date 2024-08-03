@@ -1,15 +1,14 @@
 import React from "react";
-import { useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 import MyButton from "./MyButton.js";
-import { displayNames } from "./Display.js";
+import DisplayNames from "./DisplayNames.js";
+import PropTypes from "prop-types";
 
 function GuestListPage(props) {
-  const names = displayNames(props.num);
-
+  //const names = displayNames(props.num);
   return (
     <Container
       fluid
@@ -44,7 +43,7 @@ function GuestListPage(props) {
       <Row className="mb-1">
         <h4>Sending invites to...</h4>
       </Row>
-      {names}
+      <DisplayNames guestList={props.guestList} />
       <Container className="d-flex justify-content-center align-items-center">
         <button
           className="mt-4 px-5 py-2 button-styles"
