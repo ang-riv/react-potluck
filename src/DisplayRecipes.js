@@ -6,9 +6,9 @@ import placeholder from "./images/placeholder.jpg";
 
 // displays the assigned recipe cards in AssignDishes
 function DisplayRecipes(props) {
+  // destructure to use directly
   const { dishes } = props;
 
-  const list = props.guestList;
   const assignedDishes = [...dishes];
   const recipeCards = assignedDishes.map((name, i) => (
     <Col xs={12} md={6} lg={4} key={i}>
