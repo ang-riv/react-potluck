@@ -10,7 +10,7 @@ function AssignPage(props) {
       className="recipe-container-breakpoint main-container-border py-3 rounded"
     >
       <h2 className="text-center mb-3">Everyone is bringing...</h2>
-      <DisplayRecipes guestList={props.guestList} dishes={props.dishes} />
+      <DisplayRecipes dishes={props.dishes} />
       <Container className="d-flex justify-content-center align-items-center mt-3">
         <h4>Have a great potluck!</h4>
       </Container>

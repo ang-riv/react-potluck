@@ -16,6 +16,7 @@ import Button from "react-bootstrap/Button";
 import GuestNumPage from "./GuestNumPage.js";
 import GuestListPage from "./GuestListPage.js";
 import AssignPage from "./AssignPage.js";
+import { Container } from "react-bootstrap";
 
 function App() {
   //*** testing stuff***/
@@ -50,8 +51,6 @@ function App() {
   const [recipes, setRecipes] = useState([]);
   // toggle for calling the api when a btn is pressed/the number of guests have been submitted
   const [numSubmitted, setnumSubmitted] = useState(false);
-  // resetting everything for when the form is submitted
-  const [tryAgain, setTryAgain] = useState(false);
 
   //** api key
   const apiKey = process.env.REACT_APP_RECIPE_API_KEY;
@@ -86,10 +85,15 @@ function App() {
 
   //****  methods ****/
 
-  //*** page change ***/
+  //*** start page change ***/
   const handleStartPage = () => {
     setStartPage(false);
     setNumPage(true);
+    /*
+    console.log(dishes);
+    console.log(recipes);
+    console.log(guestList);
+    */
   };
 
   //** invited section/ guest number
@@ -192,8 +196,15 @@ function App() {
 
   //** resetting the form with submit
   // tests to see what state everything is in during the try again method
-  const handleSubmit = () => {
-    setTryAgain(!tryAgain);
+  const handleTryAgain = () => {
+    // empty everything
+    setDishes([]);
+    setRecipes([]);
+    setGuestList([]);
+    setNumOfGuests(0);
+    setStartPage(true);
+    setAssignPage(false);
+    setnumSubmitted(!numSubmitted);
   };
 
   //** component props
@@ -246,7 +257,17 @@ function App() {
               name={individualGuestName}
             />
           )}
-          {assignPage && <AssignPage guestList={guestList} dishes={dishes} />}
+          {assignPage && (
+            <Container className="d-flex align-items-center justify-content-center flex-column">
+              <AssignPage dishes={dishes} />
+              <button
+                className="mt-4 py-2 px-4 button-styles"
+                onClick={handleTryAgain}
+              >
+                Try Again
+              </button>
+            </Container>
+          )}
         </div>
       </div>
     );
