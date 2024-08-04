@@ -1,23 +1,24 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import CloseButton from "react-bootstrap/CloseButton";
 import Card from "react-bootstrap/Card";
 import placeholder from "./images/placeholder.jpg";
 
 // displays the assigned recipe cards in AssignDishes
-export function displayRecipes() {
-  const recipes = [...Array(8)].map((_, i) => i + 1);
-  const recipeCards = recipes.map((i) => (
+function DisplayRecipes(props) {
+  const { dishes } = props;
+
+  const list = props.guestList;
+  const assignedDishes = [...dishes];
+  const recipeCards = assignedDishes.map((name, i) => (
     <Col xs={12} md={6} lg={4} key={i}>
       <Card className="text-center m-2">
         <Card.Header>
-          <span className="fw-bold">Name</span> is bringing:
+          <span className="fw-bold">{name.guest}</span> is bringing:
         </Card.Header>
         <Card.Img className="border-bottom" variant="top" src={placeholder} />
         <Card.Body>
-          <Card.Title>Recipe Name</Card.Title>
+          <Card.Title>{name.recipe}</Card.Title>
           <Card.Text>Recipe Description</Card.Text>
           <button className="px-3 py-1 button-styles">See Recipe</button>
         </Card.Body>
@@ -31,3 +32,5 @@ export function displayRecipes() {
     </div>
   );
 }
+
+export default DisplayRecipes;

@@ -15,6 +15,7 @@ import MyButton from "./MyButton.js";
 import Button from "react-bootstrap/Button";
 import GuestNumPage from "./GuestNumPage.js";
 import GuestListPage from "./GuestListPage.js";
+import AssignPage from "./AssignPage.js";
 
 function App() {
   //*** testing stuff***/
@@ -23,6 +24,7 @@ function App() {
   const [startPage, setStartPage] = useState(true);
   const [numPage, setNumPage] = useState(false);
   const [listPage, setListPage] = useState(false);
+  const [assignPage, setAssignPage] = useState(false);
   const testRecipes = [
     "Tacos",
     "Sandwiches",
@@ -84,7 +86,7 @@ function App() {
 
   //****  methods ****/
 
-  //*** page change methods ***/
+  //*** page change ***/
   const handleStartPage = () => {
     setStartPage(false);
     setNumPage(true);
@@ -110,7 +112,7 @@ function App() {
     console.log("Num submitted");
     //console.log(guestList);
     // checks if the guest nums have been entered/this btn was clicked to trigger the api call
-    //setnumSubmitted(!numSubmitted);
+    setnumSubmitted(!numSubmitted);
   };
 
   //** names section/ guest names
@@ -163,7 +165,8 @@ function App() {
   // assigns dishes/recipes to the guests randomly
   const handleDishes = () => {
     // make copy of array
-    const updatedRecipes = [...recipes];
+    //const updatedRecipes = [...recipes];
+    const updatedRecipes = [...testRecipes];
     // map over the guest list and assign a random recipe to each person on the list
     const newDishes = guestList.map((guest) => {
       const randomIndex = Math.floor(Math.random() * updatedRecipes.length);
@@ -174,9 +177,14 @@ function App() {
       return { guest, recipe: randomRecipe };
     });
 
-    // new states
+    // new states/ page change
     setDishes(newDishes);
     setAssigned(true);
+
+    setStartPage(false);
+    setNumPage(false);
+    setListPage(false);
+    setAssignPage(true);
 
     // some fun confetti
     confetti({ spread: 180 });
@@ -231,12 +239,14 @@ function App() {
               inputRef={inputRef}
               onChange={updateName}
               onClick={handleGuestNames}
+              onAssignClick={handleDishes}
               onKeyDown={handleKeyDown}
               guestList={guestList}
               num={numOfGuests}
               name={individualGuestName}
             />
           )}
+          {assignPage && <AssignPage guestList={guestList} dishes={dishes} />}
         </div>
       </div>
     );

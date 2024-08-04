@@ -28,7 +28,7 @@ function GuestListPage(props) {
                 onKeyDown={props.onKeyDown}
               ></Form.Control>
               <MyButton
-                className="py-1 button-styles"
+                className="py-2 button-styles"
                 onClick={props.onClick}
                 section="names"
                 num={props.num}
@@ -46,7 +46,7 @@ function GuestListPage(props) {
       <Container className="d-flex justify-content-center align-items-center">
         <button
           className="mt-4 px-5 py-2 button-styles"
-          onClick={props.onClick}
+          onClick={props.onAssignClick}
         >
           Assign Dishes
         </button>
