@@ -2,7 +2,6 @@ import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
-import placeholder from "./images/placeholder.jpg";
 
 // displays the assigned recipe cards in AssignDishes
 function DisplayRecipes(props) {
@@ -18,9 +17,8 @@ function DisplayRecipes(props) {
         </Card.Header>
         <Card.Img className="border-bottom" variant="top" src={name.image} />
         <Card.Body>
-          <Card.Title>{name.recipe}</Card.Title>
-          <Card.Text>{name.description}</Card.Text>
-          <a href={name.url} target="_blank">
+          <Card.Title>{name.title}</Card.Title>
+          <a href={name.sourceUrl} target="_blank" rel="noreferrer">
             <button className="px-3 py-1 button-styles">See Recipe</button>
           </a>
         </Card.Body>

@@ -31,6 +31,8 @@ function App() {
       title: "Tacos",
       description: "Yummy.",
       url: "https://feelgoodfoodie.net/recipe/ground-beef-tacos-napa-cabbage-guacamole/",
+      image:
+        "https://feelgoodfoodie.net/wp-content/uploads/2017/04/Ground-Beef-Tacos-9.jpg",
     },
     {
       title: "Sandwiches",
@@ -68,7 +70,7 @@ function App() {
   //****  api ****/
   useEffect(() => {
     // if the number of guests has been submitted (the btn has been pressed), then call the api
-    if (numSubmitted === true && test === false) {
+    if (numSubmitted === true) {
       const fetchRecipes = async () => {
         const response = await fetch(
           `https://api.spoonacular.com/recipes/random?number=${numOfGuests}&apiKey=${apiKey}`
@@ -76,7 +78,11 @@ function App() {
         const data = await response.json();
         console.log(data);
         // turn into an array of just the recipe titles
-        let result = data.recipes.map((element) => element.title);
+        let result = data.recipes.map((element) => ({
+          title: element.title,
+          sourceUrl: element.sourceUrl,
+          image: element.image,
+        }));
         console.log(result);
         setRecipes(result);
       };
@@ -179,8 +185,8 @@ function App() {
   // assigns dishes/recipes to the guests randomly
   const handleDishes = () => {
     // make copy of array
-    //const updatedRecipes = [...recipes];
-    const updatedRecipes = [...testRecipes];
+    const updatedRecipes = [...recipes];
+    //const updatedRecipes = [...testRecipes];
     // map over the guest list and assign a random recipe to each person on the list
     const newDishes = guestList.map((guest) => {
       const randomIndex = Math.floor(Math.random() * updatedRecipes.length);
@@ -191,9 +197,8 @@ function App() {
       // should return an array of objects with guest and another object within the object of the recipe stuff
       return {
         guest,
-        recipe: randomRecipe.title,
-        description: randomRecipe.description,
-        url: randomRecipe.url,
+        title: randomRecipe.title,
+        sourceUrl: randomRecipe.sourceUrl,
         image: randomRecipe.image,
       };
     });
