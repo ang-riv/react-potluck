@@ -16,7 +16,7 @@ import Button from "react-bootstrap/Button";
 import GuestNumPage from "./GuestNumPage.js";
 import GuestListPage from "./GuestListPage.js";
 import AssignPage from "./AssignPage.js";
-import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 
 function App() {
   //*** testing stuff***/
@@ -27,11 +27,21 @@ function App() {
   const [listPage, setListPage] = useState(false);
   const [assignPage, setAssignPage] = useState(false);
   const testRecipes = [
-    "Tacos",
-    "Sandwiches",
-    "Deviled Eggs",
-    "Kimbap",
-    "Cookies",
+    {
+      title: "Tacos",
+      description: "Yummy.",
+      url: "https://feelgoodfoodie.net/recipe/ground-beef-tacos-napa-cabbage-guacamole/",
+    },
+    {
+      title: "Sandwiches",
+      description: "Really yummy.",
+      url: "https://www.allrecipes.com/crustless-grilled-cheese-recipe-8670392",
+      image:
+        "https://www.allrecipes.com/thmb/Wq4UodV4h31IlHig5sAac28VjOQ=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8670392_Crustless-Grilled-Cheese_TheDailyGourmet_4x3-35b478fb6a2a44abbcc2c1aba0348ae4.jpg",
+    },
+    { title: "Food item", description: "Super yummy.", image: "" },
+    { title: "Another food item", description: "Very yummy.", image: "" },
+    { title: "Yet Another food item", description: "So yummy.", image: "" },
   ];
 
   //****  states ****/
@@ -178,11 +188,19 @@ function App() {
 
       // remove that recipe from the list
       updatedRecipes.splice(randomIndex, 1);
-      return { guest, recipe: randomRecipe };
+      // should return an array of objects with guest and another object within the object of the recipe stuff
+      return {
+        guest,
+        recipe: randomRecipe.title,
+        description: randomRecipe.description,
+        url: randomRecipe.url,
+        image: randomRecipe.image,
+      };
     });
 
     // new states/ page change
     setDishes(newDishes);
+    console.log(dishes);
     setAssigned(true);
 
     setStartPage(false);
@@ -274,7 +292,7 @@ function App() {
   } else {
     return (
       <div className="App">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleTryAgain}>
           <GuestNumber {...guestNumberProps} />
           <h3>Attending: {numOfGuests}</h3>
           <GuestNames {...guestNamesProps} />

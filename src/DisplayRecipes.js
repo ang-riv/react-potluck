@@ -16,11 +16,13 @@ function DisplayRecipes(props) {
         <Card.Header>
           <span className="fw-bold">{name.guest}</span> is bringing:
         </Card.Header>
-        <Card.Img className="border-bottom" variant="top" src={placeholder} />
+        <Card.Img className="border-bottom" variant="top" src={name.image} />
         <Card.Body>
           <Card.Title>{name.recipe}</Card.Title>
-          <Card.Text>Recipe Description</Card.Text>
-          <button className="px-3 py-1 button-styles">See Recipe</button>
+          <Card.Text>{name.description}</Card.Text>
+          <a href={name.url} target="_blank">
+            <button className="px-3 py-1 button-styles">See Recipe</button>
+          </a>
         </Card.Body>
       </Card>
     </Col>
