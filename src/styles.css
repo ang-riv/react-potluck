@@ -1,4 +1,8 @@
 /* for overriding some of bootstrap's styles */
+:root {
+  --main-color: #ffc107;
+  --hover-color: #edb100;
+}
 p,
 h2,
 h3,
@@ -7,14 +11,10 @@ h5 {
   font-family: "Open Sans", sans-serif;
 }
 
-.accent-color {
-  background-color: #ffb961;
-}
-
 .main-title {
   font-family: "Lobster Two", sans-serif;
   font-weight: bolder;
-  text-decoration: #ffc107 wavy underline;
+  text-decoration: var(--main-color) wavy underline;
 }
 
 .position-styles {
@@ -25,20 +25,21 @@ h5 {
 }
 
 .main-container-border {
-  border: 2px solid #ffc107;
+  border: 2px solid var(--main-color);
 }
 
+/* button styles */
 .button-styles {
   border-radius: 15px;
-  border: 2px solid #ffc107;
-  background-color: #ffc107;
+  border: 2px solid var(--main-color);
+  background-color: var(--main-color);
   font-weight: bold;
   font-family: "Open Sans", sans-serif;
 }
 
 .button-styles:hover {
-  background-color: #edb100;
-  border-color: #edb100;
+  background-color: var(--hover-color);
+  border-color: var(--hover-color);
 }
 
 .scrollable-div {
