@@ -1,25 +1,21 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-import confetti from "canvas-confetti";
 // stylesheets
 import "./styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 // components
 import StartPage from "./StartPage.js";
-import GuestNumber from "./GuestNumber.js";
-import GuestNames from "./GuestNames.js";
-import AssignDishes from "./AssignDishes.js";
-import MyButton from "./MyButton.js";
-import Button from "react-bootstrap/Button";
 import GuestNumPage from "./GuestNumPage.js";
 import GuestListPage from "./GuestListPage.js";
 import AssignPage from "./AssignPage.js";
 import Container from "react-bootstrap/Container";
+import confetti from "canvas-confetti";
 
 function App() {
-  //*** testing stuff***/
+  //*** testing to prevent using api too much, uses test recipe array instead ***/
   const test = true;
+
   //***  page change states ***/
   const [startPage, setStartPage] = useState(true);
   const [numPage, setNumPage] = useState(false);
@@ -50,14 +46,11 @@ function App() {
   const [numOfGuests, setNumOfGuests] = useState(0);
   // array of guest's names
   const [guestList, setGuestList] = useState([]);
-  // display the names nicer
-  const namesList = guestList.join(", ");
+
   // single guest's name
   const [individualGuestName, setIndividualGuestName] = useState("");
   // for displaying the dishes in a list
   const [dishes, setDishes] = useState([]);
-  // for if the dishes have already been assigned
-  const [assigned, setAssigned] = useState(false);
   // holds data pulled from recipe api
   const [recipes, setRecipes] = useState([]);
   // toggle for calling the api when a btn is pressed/the number of guests have been submitted
@@ -168,8 +161,13 @@ function App() {
   // assigns dishes/recipes to the guests randomly
   const handleDishes = () => {
     // make copy of array
-    //const updatedRecipes = [...recipes];
-    const updatedRecipes = [...testRecipes];
+    let updatedRecipes = [];
+    if (test === true) {
+      updatedRecipes = [...testRecipes];
+    } else if (test === false) {
+      updatedRecipes = [...recipes];
+    }
+    //const updatedRecipes = [...testRecipes];
     // map over the guest list and assign a random recipe to each person on the list
     const newDishes = guestList.map((guest) => {
       const randomIndex = Math.floor(Math.random() * updatedRecipes.length);
@@ -189,7 +187,6 @@ function App() {
     // new states/ page change
     setDishes(newDishes);
     console.log(dishes);
-    setAssigned(true);
 
     setStartPage(false);
     setNumPage(false);
@@ -216,27 +213,6 @@ function App() {
   };
 
   //** component props
-
-  const guestNumberProps = {
-    onChange: handleDropdown,
-    onClick: handleGuestNum,
-    num: numOfGuests,
-  };
-
-  const guestNamesProps = {
-    inputRef: inputRef,
-    onChange: updateName,
-    onClick: handleGuestNames,
-    namesList: namesList,
-    name: individualGuestName,
-    onKeyDown: handleKeyDown,
-  };
-
-  const assignDishesProps = {
-    dishes: dishes,
-    assigned: assigned,
-  };
-
   const guestNumProps = {
     onChange: handleDropdown,
     onClick: handleGuestNum,
@@ -253,56 +229,27 @@ function App() {
     numOfGuests: numOfGuests,
     name: individualGuestName,
   };
-  //*** TESTING ***/
-  if (test) {
-    return (
-      <div className="App">
-        <div className="border border-primary position-styles">
-          {startPage && <StartPage onClick={handleStartPage} />}
-          {numPage && <GuestNumPage {...guestNumProps} />}
-          {listPage && <GuestListPage {...guestNameProps} />}
-          {assignPage && (
-            <Container className="d-flex align-items-center justify-content-center flex-column">
-              <AssignPage dishes={dishes} />
-              <button
-                className="mt-4 py-2 px-4 button-styles"
-                onClick={handleTryAgain}
-              >
-                Try Again
-              </button>
-            </Container>
-          )}
-        </div>
+
+  return (
+    <div className="App">
+      <div className="border border-primary position-styles">
+        {startPage && <StartPage onClick={handleStartPage} />}
+        {numPage && <GuestNumPage {...guestNumProps} />}
+        {listPage && <GuestListPage {...guestNameProps} />}
+        {assignPage && (
+          <Container className="d-flex align-items-center justify-content-center flex-column">
+            <AssignPage dishes={dishes} />
+            <button
+              className="mt-4 py-2 px-4 button-styles"
+              onClick={handleTryAgain}
+            >
+              Try Again
+            </button>
+          </Container>
+        )}
       </div>
-    );
-  } else {
-    return (
-      <div className="App">
-        <form onSubmit={handleTryAgain}>
-          <GuestNumber {...guestNumberProps} />
-          <h3>Attending: {numOfGuests}</h3>
-          <GuestNames {...guestNamesProps} />
-          <h3>Sending invites to:</h3>
-          <h4 style={{ fontWeight: "normal" }}>{namesList}</h4>
-          <AssignDishes {...assignDishesProps} />
-          {/* assign dishes/try again button */}
-          {assigned === false ? (
-            <MyButton
-              innerText="Assign Dishes"
-              onClick={handleDishes}
-              section="assign"
-              guestList={guestList.length}
-            />
-          ) : (
-            <>
-              <h5>Have a great potluck!</h5>
-              <Button type="submit">Try Again</Button>
-            </>
-          )}
-        </form>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
