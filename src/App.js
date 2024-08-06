@@ -145,9 +145,6 @@ function App() {
       inputRef.current.focus();
     }
 
-    // TODO: change to guestList full or something
-    const disableInput = numOfGuests - 1;
-
     // if the amount of people they are inputting into the array is less than the amount of people they said were going, then add them to the array
     if (guestList.length < numOfGuests) {
       // make a copy of that array then add the name to the beginning

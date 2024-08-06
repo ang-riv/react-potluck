@@ -18,7 +18,7 @@ function DisplayRecipes(props) {
         <Card.Img className="border-bottom" variant="top" src={name.image} />
         <Card.Body>
           <Card.Title>{name.title}</Card.Title>
-          <a href={name.sourceUrl} target="_blank" rel="noreferrer">
+          <a href={name.sourceUrl} target="_blank" rel="noopener noreferrer">
             <button className="px-3 py-1 button-styles">See Recipe</button>
           </a>
         </Card.Body>
