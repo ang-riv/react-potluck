@@ -9,7 +9,7 @@ function MyButton(props) {
   // for the guest name section to test if their entry is just letters, spaces, and hyphens for hyphenated names
   const lettersOnly = /^[a-zA-Z\s-]*$/.test(props.name);
 
-  // guest number  section
+  // guest number section
   if (props.section === "invited") {
     if (props.num === 0) {
       return <ErrorModal innerText={innerText} section={props.section} />;
@@ -25,7 +25,7 @@ function MyButton(props) {
     }
   } else if (props.section === "names") {
     // guest names section
-    // if individualguestname is nothing then do the modal again like above, then if not then do the regular onClick stuff
+    // if individualguestname is nothing then do the modal again like above, if not then do the regular onClick stuff
     if (props.name === "" || !lettersOnly) {
       return <ErrorModal innerText={innerText} section={props.section} />;
     } else {

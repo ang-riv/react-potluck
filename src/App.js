@@ -209,7 +209,7 @@ function App() {
     num: numOfGuests,
   };
 
-  const guestNameProps = {
+  const guestListProps = {
     inputRef: inputRef,
     onChange: updateName,
     onClick: handleGuestNames,
@@ -226,7 +226,7 @@ function App() {
       <div className="border border-primary position-styles">
         {startPage && <StartPage onClick={handleStartPage} />}
         {numPage && <GuestNumPage {...guestNumProps} />}
-        {listPage && <GuestListPage {...guestNameProps} />}
+        {listPage && <GuestListPage {...guestListProps} />}
         {assignPage && (
           <Container className="d-flex align-items-center justify-content-center flex-column">
             <AssignPage dishes={dishes} />
