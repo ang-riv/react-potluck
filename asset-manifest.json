@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/react-potluck/static/css/main.f605587e.css",
+    "main.js": "/react-potluck/static/js/main.79e1ea4e.js",
+    "static/media/appetizer.png": "/react-potluck/static/media/appetizer.4538c457b01491ee0ea5.png",
+    "index.html": "/react-potluck/index.html",
+    "main.f605587e.css.map": "/react-potluck/static/css/main.f605587e.css.map",
+    "main.79e1ea4e.js.map": "/react-potluck/static/js/main.79e1ea4e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f605587e.css",
+    "static/js/main.79e1ea4e.js"
+  ]
+}
