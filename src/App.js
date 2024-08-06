@@ -80,7 +80,7 @@ function App() {
       };
       fetchRecipes();
     }
-  }, [apiKey, numOfGuests, numSubmitted]);
+  }, [apiKey, numOfGuests, numSubmitted, test]);
 
   //****  refs ****/
   // text input box ref

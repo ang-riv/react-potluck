@@ -22,7 +22,7 @@ function ErrorModal(props) {
       setBtnStyles("mt-4 px-5 py-2 button-styles");
       setModalText(invalidAssign);
     }
-  });
+  }, [props.section, setBtnStyles, setModalText]);
 
   // modal text description
   const invalidNum = "Please chose the number of guests that are attending.";
