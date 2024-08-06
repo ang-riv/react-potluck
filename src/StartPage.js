@@ -3,10 +3,6 @@ import Container from "react-bootstrap/Container";
 import logo from "./images/appetizer.png";
 
 function StartPage(props) {
-  const imageStyles = {
-    maxHeight: "150px",
-    maxWidth: "150px",
-  };
   return (
     <Container
       fluid
@@ -15,8 +11,7 @@ function StartPage(props) {
       <img
         src={logo}
         alt="food bowl logo"
-        className="img-fluid my-3"
-        style={imageStyles}
+        className="img-fluid my-3 logo-styles"
       ></img>
       <h1 className="main-title">Potluck Generator</h1>
       <p className="px-4 pt-2 mb-2">

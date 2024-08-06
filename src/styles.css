@@ -28,6 +28,12 @@ h5 {
   border: 2px solid var(--main-color);
 }
 
+/* logo styles*/
+.logo-styles {
+  max-height: 150px;
+  max-width: 150px;
+}
+
 /* button styles */
 .button-styles {
   border-radius: 15px;

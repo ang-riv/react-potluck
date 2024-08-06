@@ -46,7 +46,6 @@ function App() {
   const [numOfGuests, setNumOfGuests] = useState(0);
   // array of guest's names
   const [guestList, setGuestList] = useState([]);
-
   // single guest's name
   const [individualGuestName, setIndividualGuestName] = useState("");
   // for displaying the dishes in a list
@@ -68,7 +67,6 @@ function App() {
           `https://api.spoonacular.com/recipes/random?number=${numOfGuests}&apiKey=${apiKey}`
         );
         const data = await response.json();
-        console.log(data);
         // turn into an array of just the recipe titles
         let result = data.recipes.map((element) => ({
           title: element.title,
@@ -114,20 +112,17 @@ function App() {
   //** names section/ guest names
   // allows the text input box to update with the user's input
   const updateName = (e) => {
+    e.preventDefault();
     let userInput = e.target.value;
     setIndividualGuestName(userInput);
-    e.preventDefault();
   };
 
   // allow user to remove a name that is was inputted into the array
   const removeName = (index) => {
-    console.log("removed");
     setGuestList(guestList.filter((_, i) => i !== index));
-    console.log(guestList);
   };
 
   // prevent the user from submitting names with enter
-  // TODO: maybe make it do the same thing as the onClick method
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -137,7 +132,7 @@ function App() {
   // adds names to the guestList array
   const handleGuestNames = (e) => {
     e.preventDefault();
-    // makes sure that after the name is submitted, if they click the btn again, the same name isn't submitted again (even if the input box looks empty, it's still there)
+    // makes sure that after the name is submitted, if they click the btn again, the last name added isn't submitted again (even if the input box looks empty, it's still there)
     setIndividualGuestName("");
     // empty the input box after each name is entered + focus input box
     if (inputRef.current) {
@@ -163,7 +158,6 @@ function App() {
     } else if (test === false) {
       updatedRecipes = [...recipes];
     }
-    //const updatedRecipes = [...testRecipes];
     // map over the guest list and assign a random recipe to each person on the list
     const newDishes = guestList.map((guest) => {
       const randomIndex = Math.floor(Math.random() * updatedRecipes.length);
