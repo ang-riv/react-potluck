@@ -5,7 +5,6 @@ import confetti from "canvas-confetti";
 // stylesheets
 import "./styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.js";
 // components
 import StartPage from "./StartPage.js";
 import GuestNumber from "./GuestNumber.js";
@@ -223,6 +222,7 @@ function App() {
     setDishes([]);
     setRecipes([]);
     setGuestList([]);
+    setIndividualGuestName("");
     setNumOfGuests(0);
     // page change
     setStartPage(true);

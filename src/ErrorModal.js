@@ -8,16 +8,19 @@ function ErrorModal(props) {
   const [modalText, setModalText] = useState("");
   const [btnStyles, setBtnStyles] = useState("");
 
-  // when the error modal is rendered, change the style of the btns
+  // when the error modal is rendered, change the style of the btns and set text
   useEffect(() => {
     if (props.section === "invited") {
       setBtnStyles("mt-3 px-4 py-2 button-styles");
+      setModalText(invalidNum);
     }
     if (props.section === "names") {
       setBtnStyles("p-2 button-styles");
+      setModalText(invalidName);
     }
     if (props.section === "assign") {
       setBtnStyles("mt-4 px-5 py-2 button-styles");
+      setModalText(invalidAssign);
     }
   });
 
@@ -30,16 +33,13 @@ function ErrorModal(props) {
 
   // methods
   const handleClose = (e) => {
-    setShow(false);
     e.preventDefault();
+    setShow(false);
   };
 
   const handleShow = (e) => {
     e.preventDefault();
     setShow(true);
-    if (props.section === "invited") setModalText(invalidNum);
-    if (props.section === "assign") setModalText(invalidAssign);
-    if (props.section === "names") setModalText(invalidName);
   };
 
   return (

@@ -44,7 +44,7 @@ h5 {
 
 /* heights */
 .names-div {
-  min-width: 350px;
+  min-width: 430px;
   min-height: 220px;
   max-height: 225px;
 }
@@ -59,6 +59,9 @@ h5 {
   .recipe-container-breakpoint {
     border: none;
     box-shadow: none;
+  }
+  .names-div {
+    min-width: 300px;
   }
 }
 
