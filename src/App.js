@@ -223,7 +223,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="border border-primary position-styles">
+      <div className=" position-styles">
         {startPage && <StartPage onClick={handleStartPage} />}
         {numPage && <GuestNumPage {...guestNumProps} />}
         {listPage && <GuestListPage {...guestListProps} />}
