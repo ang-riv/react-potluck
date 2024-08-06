@@ -14,7 +14,7 @@ import confetti from "canvas-confetti";
 
 function App() {
   //*** testing to prevent using api too much, uses test recipe array instead ***/
-  const test = true;
+  const test = false;
 
   //***  page change states ***/
   const [startPage, setStartPage] = useState(true);
@@ -137,7 +137,8 @@ function App() {
   // adds names to the guestList array
   const handleGuestNames = (e) => {
     e.preventDefault();
-
+    // makes sure that after the name is submitted, if they click the btn again, the same name isn't submitted again (even if the input box looks empty, it's still there)
+    setIndividualGuestName("");
     // empty the input box after each name is entered + focus input box
     if (inputRef.current) {
       inputRef.current.value = "";
@@ -152,15 +153,6 @@ function App() {
       // make a copy of that array then add the name to the beginning
       const newArr = [...guestList, individualGuestName];
       setGuestList(newArr);
-
-      // hide the button after the last person is added to the array
-      if (guestList.length === disableInput) {
-        console.log("full");
-        if (inputRef.current) {
-          inputRef.current.disabled = true;
-          inputRef.current.placeholder = "Guest list full!";
-        }
-      }
     }
   };
 

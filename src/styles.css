@@ -36,6 +36,11 @@ h5 {
   font-family: "Open Sans", sans-serif;
 }
 
+.button-styles:hover {
+  background-color: #edb100;
+  border-color: #edb100;
+}
+
 .scrollable-div {
   overflow-y: auto;
   overflow-x: hidden;

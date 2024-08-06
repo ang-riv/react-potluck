@@ -46,7 +46,7 @@ function MyButton(props) {
       return (
         <>
           <button
-            className="mt-4 px-5 py-2 button-styles"
+            className="mt-2 mb-3 px-5 py-2 button-styles"
             onClick={props.onClick}
           >
             {innerText}

@@ -39,12 +39,16 @@ function GuestListPage(props) {
         </Form>
       </Row>
       <Row className="mb-1">
-        <h4>Sending invites to...</h4>
+        <h4 className="text-center">
+          Sending invites to... <br />
+        </h4>
       </Row>
       <DisplayNames guestList={props.guestList} removeName={props.removeName} />
-      <Container className="d-flex justify-content-center align-items-center">
+      <Container className="d-flex flex-column justify-content-center align-items-center">
+        <h5 className="mt-3">
+          {props.guestList.length} out of {props.numOfGuests} guests entered.
+        </h5>
         <MyButton
-          className="mt-4 px-5 py-2 button-styles"
           onClick={props.onAssignClick}
           section="assign"
           innerText="Assign Dishes"
