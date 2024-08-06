@@ -90,12 +90,7 @@ function App() {
   }, [apiKey, numOfGuests, numSubmitted]);
 
   //****  refs ****/
-  // using refs to hide whole divs/sections
-  const guestNameInputRef = useRef(null);
-  const invitedRef = useRef(null);
-  const assignDishesRef = useRef(null);
-  // individual elements
-  const listRef = useRef(null);
+  // text input box ref
   const inputRef = useRef(null);
 
   //****  methods ****/
@@ -104,11 +99,6 @@ function App() {
   const handleStartPage = () => {
     setStartPage(false);
     setNumPage(true);
-    /*
-    console.log(dishes);
-    console.log(recipes);
-    console.log(guestList);
-    */
   };
 
   //** invited section/ guest number
@@ -117,19 +107,13 @@ function App() {
 
   // hide divs + check
   const handleGuestNum = (e) => {
-    // TODO: Get rid of this later?
-    // make sure user made a selection
-    //invitedRef.current.style.display = "none";
-    // focus on the input box after btn is clicked
-    //inputRef.current.focus();
     e.preventDefault();
 
-    //? page change stuff
+    // page change stuff
     setStartPage(false);
     setNumPage(false);
     setListPage(true);
-    console.log(guestList);
-    //console.log(guestList);
+
     // checks if the guest nums have been entered/this btn was clicked to trigger the api call
     setnumSubmitted(!numSubmitted);
   };
@@ -143,6 +127,7 @@ function App() {
   };
 
   // prevent the user from submitting names with enter
+  // TODO: maybe make it do the same thing as the onClick method
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -152,7 +137,7 @@ function App() {
   // adds names to the guestList array
   const handleGuestNames = (e) => {
     e.preventDefault();
-    console.log("Clicked");
+
     // empty the input box after each name is entered + focus input box
     if (inputRef.current) {
       inputRef.current.value = "";
@@ -160,7 +145,7 @@ function App() {
     }
 
     // TODO: change to guestList full or something
-    const hideBtn = numOfGuests - 1;
+    const disableInput = numOfGuests - 1;
 
     // if the amount of people they are inputting into the array is less than the amount of people they said were going, then add them to the array
     if (guestList.length < numOfGuests) {
@@ -168,9 +153,8 @@ function App() {
       const newArr = [...guestList, individualGuestName];
       setGuestList(newArr);
 
-      // TODO: hide the button and show guestlist full and the assign dishes button
       // hide the button after the last person is added to the array
-      if (guestList.length === hideBtn) {
+      if (guestList.length === disableInput) {
         console.log("full");
         if (inputRef.current) {
           inputRef.current.disabled = true;
@@ -193,7 +177,7 @@ function App() {
 
       // remove that recipe from the list
       updatedRecipes.splice(randomIndex, 1);
-      // should return an array of objects with guest and another object within the object of the recipe stuff
+      //  return an array of objects with guest's name and recipe information
       return {
         guest,
         title: randomRecipe.title,
@@ -224,6 +208,7 @@ function App() {
     setGuestList([]);
     setIndividualGuestName("");
     setNumOfGuests(0);
+
     // page change
     setStartPage(true);
     setAssignPage(false);
@@ -231,15 +216,14 @@ function App() {
   };
 
   //** component props
+
   const guestNumberProps = {
-    div: invitedRef,
     onChange: handleDropdown,
     onClick: handleGuestNum,
     num: numOfGuests,
   };
 
   const guestNamesProps = {
-    div: guestNameInputRef,
     inputRef: inputRef,
     onChange: updateName,
     onClick: handleGuestNames,
@@ -249,37 +233,34 @@ function App() {
   };
 
   const assignDishesProps = {
-    div: assignDishesRef,
-    ul: listRef,
     dishes: dishes,
     assigned: assigned,
   };
 
+  const guestNumProps = {
+    onChange: handleDropdown,
+    onClick: handleGuestNum,
+    num: numOfGuests,
+  };
+
+  const guestNameProps = {
+    inputRef: inputRef,
+    onChange: updateName,
+    onClick: handleGuestNames,
+    onAssignClick: handleDishes,
+    onKeyDown: handleKeyDown,
+    guestList: guestList,
+    numOfGuests: numOfGuests,
+    name: individualGuestName,
+  };
   //*** TESTING ***/
   if (test) {
     return (
       <div className="App">
         <div className="border border-primary position-styles">
           {startPage && <StartPage onClick={handleStartPage} />}
-          {numPage && (
-            <GuestNumPage
-              onChange={handleDropdown}
-              onClick={handleGuestNum}
-              num={numOfGuests}
-            />
-          )}
-          {listPage && (
-            <GuestListPage
-              inputRef={inputRef}
-              onChange={updateName}
-              onClick={handleGuestNames}
-              onAssignClick={handleDishes}
-              onKeyDown={handleKeyDown}
-              guestList={guestList}
-              num={numOfGuests}
-              name={individualGuestName}
-            />
-          )}
+          {numPage && <GuestNumPage {...guestNumProps} />}
+          {listPage && <GuestListPage {...guestNameProps} />}
           {assignPage && (
             <Container className="d-flex align-items-center justify-content-center flex-column">
               <AssignPage dishes={dishes} />
