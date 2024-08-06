@@ -6,16 +6,14 @@ import CloseButton from "react-bootstrap/CloseButton";
 
 // displays the names of the guests added in GuestListPage
 function DisplayNames(props) {
-  const removeName = () => {
-    console.log(names);
-  };
+  const deleteByIndex = () => props.removeName(props.index);
   const list = props.guestList;
   const names = [...list];
   const nameBlocks = names.map((name, i) => (
     <Col xs={12} sm={6} key={i}>
       <Container className="d-flex p-2 mb-3 align-items-center justify-content-center border rounded">
         <p className="m-0 p-0">{name}</p>
-        <CloseButton className="ms-auto" onClick={removeName} />
+        <CloseButton className="ms-auto" onClick={() => props.removeName(i)} />
       </Container>
     </Col>
   ));

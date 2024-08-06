@@ -41,7 +41,7 @@ function GuestListPage(props) {
       <Row className="mb-1">
         <h4>Sending invites to...</h4>
       </Row>
-      <DisplayNames guestList={props.guestList} />
+      <DisplayNames guestList={props.guestList} removeName={props.removeName} />
       <Container className="d-flex justify-content-center align-items-center">
         <MyButton
           className="mt-4 px-5 py-2 button-styles"

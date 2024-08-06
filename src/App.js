@@ -119,6 +119,13 @@ function App() {
     e.preventDefault();
   };
 
+  // allow user to remove a name that is was inputted into the array
+  const removeName = (index) => {
+    console.log("removed");
+    setGuestList(guestList.filter((_, i) => i !== index));
+    console.log(guestList);
+  };
+
   // prevent the user from submitting names with enter
   // TODO: maybe make it do the same thing as the onClick method
   const handleKeyDown = (e) => {
@@ -225,6 +232,7 @@ function App() {
     onClick: handleGuestNames,
     onAssignClick: handleDishes,
     onKeyDown: handleKeyDown,
+    removeName: removeName,
     guestList: guestList,
     numOfGuests: numOfGuests,
     name: individualGuestName,
