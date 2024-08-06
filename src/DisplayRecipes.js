@@ -9,16 +9,24 @@ function DisplayRecipes(props) {
   const { dishes } = props;
 
   const assignedDishes = [...dishes];
-  const recipeCards = assignedDishes.map((name, i) => (
+  const recipeCards = assignedDishes.map((cardInfo, i) => (
     <Col xs={12} md={6} lg={4} key={i}>
       <Card className="text-center m-2">
         <Card.Header>
-          <span className="fw-bold">{name.guest}</span> is bringing:
+          <span className="fw-bold">{cardInfo.guest}</span> is bringing:
         </Card.Header>
-        <Card.Img className="border-bottom" variant="top" src={name.image} />
+        <Card.Img
+          className="border-bottom"
+          variant="top"
+          src={cardInfo.image}
+        />
         <Card.Body>
-          <Card.Title>{name.title}</Card.Title>
-          <a href={name.sourceUrl} target="_blank" rel="noopener noreferrer">
+          <Card.Title>{cardInfo.title}</Card.Title>
+          <a
+            href={cardInfo.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <button className="px-3 py-1 button-styles">See Recipe</button>
           </a>
         </Card.Body>
@@ -27,7 +35,6 @@ function DisplayRecipes(props) {
   ));
   return (
     <div className="scrollable-div recipes-div-height">
-      {/* add cols in the same way as DisplayNames*/}
       <Row>{recipeCards}</Row>
     </div>
   );
