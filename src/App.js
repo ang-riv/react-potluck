@@ -70,7 +70,7 @@ function App() {
   //****  api ****/
   useEffect(() => {
     // if the number of guests has been submitted (the btn has been pressed), then call the api
-    if (numSubmitted === true) {
+    if (numSubmitted === true && test === false) {
       const fetchRecipes = async () => {
         const response = await fetch(
           `https://api.spoonacular.com/recipes/random?number=${numOfGuests}&apiKey=${apiKey}`
@@ -185,8 +185,8 @@ function App() {
   // assigns dishes/recipes to the guests randomly
   const handleDishes = () => {
     // make copy of array
-    const updatedRecipes = [...recipes];
-    //const updatedRecipes = [...testRecipes];
+    //const updatedRecipes = [...recipes];
+    const updatedRecipes = [...testRecipes];
     // map over the guest list and assign a random recipe to each person on the list
     const newDishes = guestList.map((guest) => {
       const randomIndex = Math.floor(Math.random() * updatedRecipes.length);
@@ -217,14 +217,14 @@ function App() {
     confetti({ spread: 180 });
   };
 
-  //** resetting the form with submit
-  // tests to see what state everything is in during the try again method
+  //** resetting everything
   const handleTryAgain = () => {
     // empty everything
     setDishes([]);
     setRecipes([]);
     setGuestList([]);
     setNumOfGuests(0);
+    // page change
     setStartPage(true);
     setAssignPage(false);
     setnumSubmitted(!numSubmitted);

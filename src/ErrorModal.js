@@ -1,13 +1,22 @@
 import React from "react";
-import "bootstrap/dist/js/bootstrap.js";
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
+import { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 
 function ErrorModal(props) {
   // states
   const [show, setShow] = useState(false);
   const [modalText, setModalText] = useState("");
+  const [btnStyles, setBtnStyles] = useState("");
+
+  // when the error modal is rendered, change the style of the btns
+  useEffect(() => {
+    if (props.section === "invited") {
+      setBtnStyles("mt-3 px-4 py-2 button-styles");
+    }
+    if (props.section === "names") {
+      setBtnStyles("p-2 button-styles");
+    }
+  });
 
   // modal text description
   const invalidNum = "Please chose the number of guests that are attending.";
@@ -16,6 +25,7 @@ function ErrorModal(props) {
   const invalidAssign =
     "Guest list is empty. Please add each of your guests' names into the second section. You can't assign dishes if you have no guests to assign them to!";
 
+  // methods
   const handleClose = (e) => {
     setShow(false);
     e.preventDefault();
@@ -28,9 +38,10 @@ function ErrorModal(props) {
     if (props.section === "names") setModalText(invalidName);
   };
 
+  // uses bootstrap's styling and changes based on what section the btn is in
   return (
     <>
-      <button className="mt-3 px-5 py-2 button-styles" onClick={handleShow}>
+      <button className={btnStyles} onClick={handleShow}>
         {props.innerText}
       </button>
       <Modal show={show} onHide={handleClose}>

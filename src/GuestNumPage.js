@@ -36,7 +36,7 @@ function GuestNumPage(props) {
           <MyButton
             className="mt-3 px-5 py-2 button-styles"
             onClick={props.onClick}
-            section="names"
+            section="invited"
             num={props.num}
             innerText="Submit Guests"
           />

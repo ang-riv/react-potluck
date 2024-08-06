@@ -18,7 +18,7 @@ function MyButton(props) {
     } else {
       return (
         <button
-          className="mt-3 px-5 py-2 button-styles"
+          className="mt-3 px-4 py-2 button-styles"
           onClick={props.onClick}
         >
           {innerText}
@@ -33,7 +33,7 @@ function MyButton(props) {
     } else {
       return (
         <>
-          <button className="px-1 py-2 button-styles" onClick={props.onClick}>
+          <button className="p-2 button-styles" onClick={props.onClick}>
             {innerText}
           </button>
         </>

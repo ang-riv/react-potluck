@@ -28,7 +28,7 @@ function GuestListPage(props) {
                 onKeyDown={props.onKeyDown}
               ></Form.Control>
               <MyButton
-                className="py-2 button-styles"
+                className="button-styles"
                 onClick={props.onClick}
                 section="names"
                 num={props.num}
