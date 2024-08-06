@@ -16,6 +16,9 @@ function ErrorModal(props) {
     if (props.section === "names") {
       setBtnStyles("p-2 button-styles");
     }
+    if (props.section === "assign") {
+      setBtnStyles("mt-4 px-5 py-2 button-styles");
+    }
   });
 
   // modal text description
@@ -30,6 +33,7 @@ function ErrorModal(props) {
     setShow(false);
     e.preventDefault();
   };
+
   const handleShow = (e) => {
     e.preventDefault();
     setShow(true);
@@ -38,7 +42,6 @@ function ErrorModal(props) {
     if (props.section === "names") setModalText(invalidName);
   };
 
-  // uses bootstrap's styling and changes based on what section the btn is in
   return (
     <>
       <button className={btnStyles} onClick={handleShow}>

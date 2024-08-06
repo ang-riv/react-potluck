@@ -42,12 +42,17 @@ function MyButton(props) {
   } else if (props.section === "assign") {
     // assign dishes section
     // if the guestlist is empty then return the modal
-    if (props.guestList === 0) {
+    if (props.guestList.length === 0) {
       return <ErrorModal innerText={innerText} section={props.section} />;
     } else {
       return (
         <>
-          <button onClick={props.onClick}>{innerText}</button>
+          <button
+            className="mt-4 px-5 py-2 button-styles"
+            onClick={props.onClick}
+          >
+            {innerText}
+          </button>
         </>
       );
     }

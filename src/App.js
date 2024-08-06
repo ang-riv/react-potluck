@@ -129,7 +129,7 @@ function App() {
     setStartPage(false);
     setNumPage(false);
     setListPage(true);
-    console.log("Num submitted");
+    console.log(guestList);
     //console.log(guestList);
     // checks if the guest nums have been entered/this btn was clicked to trigger the api call
     setnumSubmitted(!numSubmitted);
