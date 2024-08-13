@@ -19,6 +19,7 @@ This project uses React Bootstrap for most of it's styling as well as a separate
 - Implementing react-router-dom for page switches instead of states.
 - Adding transitions between pages with possibly [React Spring](https://www.react-spring.dev/) or [Framer motion](https://www.framer.com/motion/)
 - Better design/visual elements (designing definitely is not my strong suit)
+- Change structure so that I'm not passing down so much props to each component
 
 ## Extra Notes
 
