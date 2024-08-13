@@ -8,6 +8,12 @@ Tired of having the same boring foods brought to the potluck every single time? 
 
 That's where this project comes in. It takes in the number of guests attending, each guest's name, and assigns them a new and interesting dish!
 
+## Images
+
+![Starting page](/src/images/start-page.png)
+
+![Recipe cards that have been assigned to each guest](/src/images/recipe-page.png)
+
 ## Details
 
 This project uses React Bootstrap for most of it's styling as well as a separate css file for added styles like colors and positioning. The recipes are gathered from the awesome [spoonacular API](https://spoonacular.com/food-api), using the `random` parameter. Each recipe assigned to each guest includes the name of the recipe, image, and link to the recipe. This project also launches some fun confetti from [canvas-confetti](https://github.com/catdad/canvas-confetti).
